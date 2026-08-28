@@ -77,6 +77,7 @@ class CineWaveApp {
     }
 
     renderAllViews() {
+        this.updateNavbarVisibility();
         this.renderUserSessionPill();
         this.renderHero();
         this.renderTamilMovieSections();
@@ -84,6 +85,17 @@ class CineWaveApp {
         this.renderMyBookings();
         this.renderNotifications();
         this.updateHeaderBadges();
+    }
+
+    updateNavbarVisibility() {
+        const li = document.getElementById("navPegaPortalLi");
+        if (!li) return;
+        const role = window.pegaEngine.currentUserRole;
+        if (role === "Booking Staff" || role === "Cinema Manager" || role === "Administrator") {
+            li.style.display = "block";
+        } else {
+            li.style.display = "none";
+        }
     }
 
     // ==========================================
@@ -107,6 +119,7 @@ class CineWaveApp {
 
             document.getElementById("roleDropdownMenu").classList.remove("show");
             this.navigateView("home");
+            this.updateNavbarVisibility();
             this.showToast(`Switched persona to: ${roleName}`, "info");
         } else {
             document.getElementById("roleDropdownMenu").classList.remove("show");
@@ -1166,6 +1179,7 @@ class CineWaveApp {
             });
 
             this.closePegaOperatorModal();
+            this.updateNavbarVisibility();
             this.showToast(`Welcome Operator: ${operator.name} (${operator.role})`, "success");
             this.navigateView("pega-portal");
         } catch (err) {

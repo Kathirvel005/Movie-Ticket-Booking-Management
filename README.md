@@ -78,6 +78,28 @@
 - **Cinema Manager**: Maintain movies catalog, add new show schedules, update pricing, toggle Sold Out/Cancelled statuses.
 - **Administrator**: Monitor SLA health matrix, decision routing tables, and full Pega data model.
 
+## 📷 Visual Gallery & Screenshots
+
+### 1. Customer Booking Portal & Digital QR Ticket
+*Experience the dark cinema interface, ticket selection, curved seat map, and the verified digital entry pass with a live scannable QR code.*
+![CineWave Booking Ticket](assets/digital_qr_ticket.png)
+
+### 2. Pega Case Worker Dashboard & Charts
+*Staff workspace featuring live SLA countdowns, queue filters, and interactive analytical charts tracking case statuses.*
+![Pega Operations Dashboard](assets/pega_portal_charts.png)
+
+### 3. Pega Case Inspector & Audit Trail
+*Drill down into any ticket case. Inspect historical operator actions, SLA deadline flags, and automatic routing rules.*
+![Pega Case Audit Trail](assets/case_audit_trail.png)
+
+### 4. Cinema Manager Live Catalog Inventory (CRUD)
+*Real-time movie details, theatre capacities, screens management, and capacity updates.*
+![Cinema Manager Inventory CRUD](assets/manager_inventory.png)
+
+### 5. Pega Platform™ SLA Urgency & Routing Architecture
+*Visual breakdown of automated business rules, routing matrices, and SLA escalations.*
+![Pega Business Rules Architecture](assets/pega_rules_architecture.png)
+
 ---
 
 ## 💻 Tech Stack

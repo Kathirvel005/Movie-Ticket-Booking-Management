@@ -15,6 +15,7 @@ class CineWaveApp {
         this.selectedCategory = "Premium";
         this.selectedWorkbasketFilter = "All";
         this.chartInstances = {};
+        this.pendingOperatorRole = null;
 
         this.init();
     }
@@ -94,24 +95,23 @@ class CineWaveApp {
     }
 
     selectRole(roleName) {
-        window.pegaEngine.currentUserRole = roleName;
-        document.getElementById("currentRoleLabel").textContent = roleName;
-        document.getElementById("currentRoleAvatar").textContent = roleName.charAt(0);
-        
-        document.querySelectorAll(".role-option").forEach(opt => {
-            opt.classList.remove("selected");
-            if (opt.textContent.includes(roleName)) opt.classList.add("selected");
-        });
+        if (roleName === "Customer") {
+            window.pegaEngine.currentUserRole = roleName;
+            document.getElementById("currentRoleLabel").textContent = roleName;
+            document.getElementById("currentRoleAvatar").textContent = roleName.charAt(0);
+            
+            document.querySelectorAll(".role-option").forEach(opt => {
+                opt.classList.remove("selected");
+                if (opt.textContent.includes(roleName)) opt.classList.add("selected");
+            });
 
-        document.getElementById("roleDropdownMenu").classList.remove("show");
-
-        if (roleName === "Booking Staff" || roleName === "Cinema Manager" || roleName === "Administrator") {
-            this.navigateView("pega-portal");
-        } else {
+            document.getElementById("roleDropdownMenu").classList.remove("show");
             this.navigateView("home");
+            this.showToast(`Switched persona to: ${roleName}`, "info");
+        } else {
+            document.getElementById("roleDropdownMenu").classList.remove("show");
+            this.openPegaOperatorModal(roleName);
         }
-
-        this.showToast(`Switched persona to: ${roleName}`, "info");
     }
 
     // ==========================================
@@ -1116,6 +1116,60 @@ class CineWaveApp {
         
         if (this.currentView === "my-bookings") {
             this.renderMyBookings();
+        }
+    }
+
+    // ==========================================
+    // PEGA OPERATOR SECURE AUTHENTICATION UI
+    // ==========================================
+    openPegaOperatorModal(roleName) {
+        this.pendingOperatorRole = roleName;
+        document.getElementById("pegaOperatorModal").classList.add("open");
+        document.getElementById("pegaOperatorPassword").value = "";
+        
+        const idInput = document.getElementById("pegaOperatorId");
+        if (roleName === "Booking Staff") {
+            idInput.value = "arun@cinewave.in";
+        } else if (roleName === "Cinema Manager") {
+            idInput.value = "manager@cinewave.in";
+        } else if (roleName === "Administrator") {
+            idInput.value = "admin@cinewave.in";
+        } else {
+            idInput.value = "";
+        }
+    }
+
+    closePegaOperatorModal() {
+        document.getElementById("pegaOperatorModal").classList.remove("open");
+        this.pendingOperatorRole = null;
+    }
+
+    handleOperatorLoginSubmit(e) {
+        e.preventDefault();
+        const opId = document.getElementById("pegaOperatorId").value;
+        const opPass = document.getElementById("pegaOperatorPassword").value;
+
+        try {
+            const operator = window.pegaEngine.authenticateOperator(opId, opPass);
+            
+            if (operator.role !== this.pendingOperatorRole) {
+                throw new Error(`Pega Routing Error: Operator is not authorized for the '${this.pendingOperatorRole}' workspace.`);
+            }
+
+            window.pegaEngine.currentUserRole = operator.role;
+            document.getElementById("currentRoleLabel").textContent = operator.role;
+            document.getElementById("currentRoleAvatar").textContent = operator.role.charAt(0);
+            
+            document.querySelectorAll(".role-option").forEach(opt => {
+                opt.classList.remove("selected");
+                if (opt.textContent.includes(operator.role)) opt.classList.add("selected");
+            });
+
+            this.closePegaOperatorModal();
+            this.showToast(`Welcome Operator: ${operator.name} (${operator.role})`, "success");
+            this.navigateView("pega-portal");
+        } catch (err) {
+            this.showToast(err.message, "error");
         }
     }
 }

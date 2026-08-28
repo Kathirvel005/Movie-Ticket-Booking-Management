@@ -159,6 +159,24 @@ class PegaCaseEngine {
         return user;
     }
 
+    authenticateOperator(operatorId, password) {
+        const operators = {
+            "arun@cinewave.in": { role: "Booking Staff", password: "staffpassword", name: "Arun" },
+            "meena@cinewave.in": { role: "Booking Staff", password: "staffpassword", name: "Meena" },
+            "manager@cinewave.in": { role: "Cinema Manager", password: "managerpassword", name: "Raman (Manager)" },
+            "admin@cinewave.in": { role: "Administrator", password: "adminpassword", name: "Admin Kathirvel" }
+        };
+
+        const email = (operatorId || "").toLowerCase().trim();
+        const op = operators[email];
+
+        if (!op || op.password !== password) {
+            throw new Error("Pega Authentication Failed: Invalid Operator ID or credentials.");
+        }
+
+        return op;
+    }
+
     getLoggedInUser() {
         const stored = localStorage.getItem("CINEWAVE_LOGGED_IN_USER");
         if (stored) {

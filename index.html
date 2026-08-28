@@ -718,6 +718,51 @@
         </div>
     </div>
 
+    <!-- ==========================================================================
+       PEGA OPERATOR LOGIN MODAL (Secure Role Access)
+       ========================================================================== -->
+    <div class="modal-overlay" id="pegaOperatorModal">
+        <div class="modal-container" style="max-width: 400px; z-index: 10001;">
+            <div class="modal-header" style="border-bottom: 2px solid var(--accent-gold);">
+                <div class="modal-title-box">
+                    <h3 style="color: var(--accent-gold); display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem;">
+                        <i class="fa-solid fa-shield-halved"></i> Pega Portal Authorization
+                    </h3>
+                    <p id="pegaOperatorSubtitle" style="font-size: 0.75rem; margin-top: 2px;">Authorized Operator ID Verification</p>
+                </div>
+                <button class="modal-close-btn" onclick="app.closePegaOperatorModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="pega-operator-alert" style="background: rgba(255, 183, 3, 0.1); border: 1px solid var(--border-gold); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--accent-gold); margin-bottom: 1.25rem;">
+                    <i class="fa-solid fa-circle-info"></i> Accessing secure Pega case workspace requires Operator verification.
+                </div>
+                
+                <form id="pegaOperatorLoginForm" onsubmit="app.handleOperatorLoginSubmit(event)">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label>Operator ID (Email) *</label>
+                        <input type="email" id="pegaOperatorId" placeholder="e.g. arun@cinewave.in" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.7rem; border-radius: var(--radius-sm);">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Secure Password *</label>
+                        <input type="password" id="pegaOperatorPassword" placeholder="••••••••" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.7rem; border-radius: var(--radius-sm);">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem;">
+                        <i class="fa-solid fa-key"></i> Authenticate Session
+                    </button>
+                    
+                    <div style="margin-top: 1.25rem; border-top: 1px solid var(--border-light); padding-top: 1rem; font-size: 0.75rem; color: var(--text-muted);">
+                        <strong style="color: var(--accent-cyan);">Authorized Pega Operator IDs:</strong>
+                        <ul style="padding-left: 1.2rem; margin: 0.25rem 0 0 0; line-height: 1.5; text-align: left;">
+                            <li><strong>Staff:</strong> <code>arun@cinewave.in</code> (Pass: <code>staffpassword</code>)</li>
+                            <li><strong>Manager:</strong> <code>manager@cinewave.in</code> (Pass: <code>managerpassword</code>)</li>
+                            <li><strong>Admin:</strong> <code>admin@cinewave.in</code> (Pass: <code>adminpassword</code>)</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="js/data.js"></script>
     <script src="js/pega-engine.js"></script>

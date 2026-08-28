@@ -453,7 +453,21 @@
                         </div>
                         <div class="form-group">
                             <label>Mobile Number (SMS Alert) *</label>
-                            <input type="tel" id="custMobileInput" value="+91 94432 98765" placeholder="+91 98765 43210" required>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <select id="custMobileCode" style="width: 90px; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; border-radius: var(--radius-sm); padding: 0.5rem; font-size: 0.85rem; height: 100%; box-sizing: border-box; min-height: 42px;">
+                                    <option value="+91" selected>🇮🇳 +91</option>
+                                    <option value="+1">🇺🇸 +1</option>
+                                    <option value="+44">🇬🇧 +44</option>
+                                    <option value="+971">🇦🇪 +971</option>
+                                    <option value="+65">🇸🇬 +65</option>
+                                    <option value="+60">🇲🇾 +60</option>
+                                    <option value="+61">🇦🇺 +61</option>
+                                    <option value="+86">🇨🇳 +86</option>
+                                    <option value="+81">🇯🇵 +81</option>
+                                    <option value="+94">🇱🇰 +94</option>
+                                </select>
+                                <input type="tel" id="custMobileInput" value="94432 98765" placeholder="98765 43210" required style="flex: 1;">
+                            </div>
                         </div>
                     </div>
 
@@ -708,7 +722,21 @@
                     </div>
                     <div class="form-group" style="margin-bottom: 1.25rem;">
                         <label>Mobile Number (for SMS tickets) *</label>
-                        <input type="tel" id="regMobile" placeholder="+91 98765 43210" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.6rem; border-radius: var(--radius-sm);">
+                        <div style="display: flex; gap: 0.5rem;">
+                            <select id="regMobileCode" style="width: 90px; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; border-radius: var(--radius-sm); padding: 0.6rem; font-size: 0.85rem; box-sizing: border-box; min-height: 40px;">
+                                <option value="+91" selected>🇮🇳 +91</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+44">🇬🇧 +44</option>
+                                <option value="+971">🇦🇪 +971</option>
+                                <option value="+65">🇸🇬 +65</option>
+                                <option value="+60">🇲🇾 +60</option>
+                                <option value="+61">🇦🇺 +61</option>
+                                <option value="+86">🇨🇳 +86</option>
+                                <option value="+81">🇯🇵 +81</option>
+                                <option value="+94">🇱🇰 +94</option>
+                            </select>
+                            <input type="tel" id="regMobile" placeholder="98765 43210" required style="flex: 1; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.6rem; border-radius: var(--radius-sm);">
+                        </div>
                     </div>
                     <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem;">
                         <i class="fa-solid fa-user-plus"></i> Create Account

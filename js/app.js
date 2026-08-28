@@ -391,7 +391,37 @@ class CineWaveApp {
         // Fill user profile inputs
         document.getElementById("custNameInput").value = loggedInUser.name;
         document.getElementById("custEmailInput").value = loggedInUser.email;
-        document.getElementById("custMobileInput").value = loggedInUser.mobile;
+        
+        // Parse user mobile number and pre-fill country code and input
+        const fullMobile = (loggedInUser.mobile || "").trim();
+        const spaceIdx = fullMobile.indexOf(" ");
+        if (spaceIdx > 0) {
+            const code = fullMobile.substring(0, spaceIdx);
+            const num = fullMobile.substring(spaceIdx + 1);
+            const codeSelect = document.getElementById("custMobileCode");
+            if (codeSelect && [...codeSelect.options].some(o => o.value === code)) {
+                codeSelect.value = code;
+                document.getElementById("custMobileInput").value = num;
+            } else {
+                document.getElementById("custMobileInput").value = fullMobile;
+            }
+        } else if (fullMobile.startsWith("+")) {
+            let matched = false;
+            const codes = ["+91", "+1", "+44", "+971", "+65", "+60", "+61", "+86", "+81", "+94"];
+            for (const c of codes) {
+                if (fullMobile.startsWith(c)) {
+                    document.getElementById("custMobileCode").value = c;
+                    document.getElementById("custMobileInput").value = fullMobile.replace(c, "").trim();
+                    matched = true;
+                    break;
+                }
+            }
+            if (!matched) {
+                document.getElementById("custMobileInput").value = fullMobile;
+            }
+        } else {
+            document.getElementById("custMobileInput").value = fullMobile;
+        }
 
         this.renderWizardStagesBar(0);
         this.populateWizardDropdowns();
@@ -678,7 +708,7 @@ class CineWaveApp {
     proceedToBookingConfirmation() {
         const custName = document.getElementById("custNameInput")?.value || "";
         const email = document.getElementById("custEmailInput")?.value || "";
-        const mobile = document.getElementById("custMobileInput")?.value || "";
+        const mobile = (document.getElementById("custMobileCode")?.value || "+91") + " " + (document.getElementById("custMobileInput")?.value || "").trim();
         const confirmed = document.getElementById("customerConfirmationCheck")?.checked;
 
         if (this.selectedSeats.length === 0) {
@@ -1120,7 +1150,7 @@ class CineWaveApp {
         const passwordInput = document.getElementById("regPassword").value;
         const nameInput = document.getElementById("regName").value;
         const emailInput = document.getElementById("regEmail").value;
-        const mobileInput = document.getElementById("regMobile").value;
+        const mobileInput = document.getElementById("regMobileCode").value + " " + document.getElementById("regMobile").value.trim();
 
         try {
             const newUser = window.pegaEngine.registerUser(usernameInput, passwordInput, nameInput, emailInput, mobileInput);

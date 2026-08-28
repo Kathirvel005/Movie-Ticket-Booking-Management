@@ -22,8 +22,8 @@ const CineWaveInitialData = {
             director: "Venkat Prabhu",
             cast: "Thalapathy Vijay, Prashanth, Prabhu Deva, Sneha, Meenakshi Chaudhary",
             description: "A former elite member of the Special Anti-Terrorist Squad (SATS) is summoned back into action when an old vendetta threatens the nation and his own estranged family.",
-            posterUrl: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80",
-            backdropUrl: "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=1200&q=80",
+            posterUrl: "assets/goat_poster.png",
+            backdropUrl: "assets/goat_poster.png",
             trailerUrl: "https://www.youtube.com",
             featured: true
         },

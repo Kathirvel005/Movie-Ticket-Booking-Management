@@ -88,13 +88,25 @@ class CineWaveApp {
     }
 
     updateNavbarVisibility() {
-        const li = document.getElementById("navPegaPortalLi");
-        if (!li) return;
+        const portalLi = document.getElementById("navPegaPortalLi");
+        const bookingsLi = document.getElementById("navMyBookingsLi");
         const role = window.pegaEngine.currentUserRole;
-        if (role === "Booking Staff" || role === "Cinema Manager" || role === "Administrator") {
-            li.style.display = "block";
-        } else {
-            li.style.display = "none";
+        const loggedInUser = window.pegaEngine.getLoggedInUser();
+
+        if (portalLi) {
+            if (role === "Booking Staff" || role === "Cinema Manager" || role === "Administrator") {
+                portalLi.style.display = "block";
+            } else {
+                portalLi.style.display = "none";
+            }
+        }
+
+        if (bookingsLi) {
+            if (loggedInUser && role === "Customer") {
+                bookingsLi.style.display = "block";
+            } else {
+                bookingsLi.style.display = "none";
+            }
         }
     }
 
@@ -1092,6 +1104,7 @@ class CineWaveApp {
             this.showToast(`Welcome back, ${user.name}!`, "success");
             this.closeAuthModal();
             this.renderUserSessionPill();
+            this.updateNavbarVisibility();
             
             if (this.currentView === "my-bookings") {
                 this.renderMyBookings();
@@ -1126,6 +1139,7 @@ class CineWaveApp {
         window.pegaEngine.logoutUser();
         this.showToast("Signed out successfully.", "info");
         this.renderUserSessionPill();
+        this.updateNavbarVisibility();
         
         if (this.currentView === "my-bookings") {
             this.renderMyBookings();

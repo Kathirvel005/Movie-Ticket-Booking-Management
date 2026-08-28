@@ -42,8 +42,8 @@ const CineWaveInitialData = {
             director: "T. J. Gnanavel",
             cast: "Superstar Rajinikanth, Amitabh Bachchan, Fahadh Faasil, Rana Daggubati, Manju Warrier",
             description: "A principled encounter specialist takes on the corruption within the educational and corporate nexus, triggering a philosophical confrontation with the justice system.",
-            posterUrl: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=600&q=80",
-            backdropUrl: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80",
+            posterUrl: "assets/vettaiyan_poster.jpg",
+            backdropUrl: "assets/vettaiyan_poster.jpg",
             trailerUrl: "https://www.youtube.com",
             featured: true
         },

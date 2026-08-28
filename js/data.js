@@ -249,8 +249,8 @@ const CineWaveInitialData = {
             director: "R. S. Durai Senthilkumar",
             cast: "Soori, M. Sasikumar, Unni Mukundan, Revathi Sharma, Samuthirakani",
             description: "An extraordinarily loyal confidant finds himself torn between two childhood brothers when land disputes and greed threaten to tear their village apart.",
-            posterUrl: "https://images.unsplash.com/photo-1616530940355-351fabd9524b?auto=format&fit=crop&w=600&q=80",
-            backdropUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+            posterUrl: "assets/garudan_poster.png",
+            backdropUrl: "assets/garudan_poster.png",
             trailerUrl: "https://www.youtube.com",
             featured: false
         }

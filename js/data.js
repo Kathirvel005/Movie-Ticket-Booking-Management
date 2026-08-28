@@ -1,27 +1,34 @@
 /**
- * CineWave Entertainment - Pega Movie Ticket Booking System
- * Seed Data & Database Store
+ * CineWave Entertainment - Tamil Movie Ticket Booking System
+ * Complete Database Store with July 2026 & August 2026 Tamil Movies
  * Designed & Developed by Kathirvel T
  */
 
 const CineWaveInitialData = {
-    // Current Indian & Global Blockbuster Movies with high-res verified posters
+    // Verified Tamil Movies released in August 2026 (This Month) and July 2026 (Last Month)
     movies: [
+        // ==========================================
+        // 1. RELEASED THIS MONTH – AUGUST 2026
+        // ==========================================
         {
             id: "MOV-001",
+            tamilTitle: "தி கிரேட்டஸ்ட் ஆஃப் ஆல் டைம்",
+            englishTitle: "The Greatest of All Time (GOAT)",
             title: "The Greatest of All Time (GOAT)",
+            releaseCategory: "August 2026",
+            releaseCategoryLabel: "Released This Month – Aug 2026",
             language: "Tamil",
             genre: "Action / Sci-Fi / Thriller",
             duration: "3h 03m",
             certification: "U/A",
-            rating: 8.4,
-            votes: "142.5K",
-            releaseDate: "05 Sep 2024",
-            startingPrice: 150,
+            rating: 8.8,
+            votes: "148.5K",
+            releaseDate: "28 Aug 2026",
+            startingPrice: 160,
             status: "Now Showing",
             director: "Venkat Prabhu",
-            cast: "Thalapathy Vijay, Prashanth, Prabhu Deva, Sneha, Meenakshi Chaudhary",
-            description: "A former elite member of the Special Anti-Terrorist Squad (SATS) is summoned back into action when an old vendetta threatens the nation and his own estranged family.",
+            cast: "Thalapathy Vijay, Prashanth, Prabhu Deva, Sneha, Meenakshi Chaudhary, Mohan",
+            description: "A former elite officer of the Special Anti-Terrorist Squad (SATS) must confront a catastrophic high-tech vendetta threatening the nation and his own estranged family.",
             posterUrl: "assets/goat_poster.png",
             backdropUrl: "assets/goat_poster.png",
             trailerUrl: "https://www.youtube.com",
@@ -29,87 +36,227 @@ const CineWaveInitialData = {
         },
         {
             id: "MOV-002",
-            title: "Vettaiyan",
-            language: "Tamil",
-            genre: "Action / Crime / Drama",
-            duration: "2h 48m",
-            certification: "U/A",
-            rating: 8.6,
-            votes: "118.2K",
-            releaseDate: "10 Oct 2024",
-            startingPrice: 160,
-            status: "Now Showing",
-            director: "T. J. Gnanavel",
-            cast: "Superstar Rajinikanth, Amitabh Bachchan, Fahadh Faasil, Rana Daggubati, Manju Warrier",
-            description: "A principled encounter specialist takes on the corruption within the educational and corporate nexus, triggering a philosophical confrontation with the justice system.",
-            posterUrl: "assets/vettaiyan_poster.jpg",
-            backdropUrl: "assets/vettaiyan_poster.jpg",
-            trailerUrl: "https://www.youtube.com",
-            featured: true
-        },
-        {
-            id: "MOV-003",
-            title: "Amaran",
-            language: "Tamil",
-            genre: "Biographical / Action / Drama",
-            duration: "2h 49m",
-            certification: "U/A",
-            rating: 9.1,
-            votes: "165.8K",
-            releaseDate: "31 Oct 2024",
-            startingPrice: 140,
-            status: "Now Showing",
-            director: "Rajkumar Periasamy",
-            cast: "Sivakarthikeyan, Sai Pallavi, Bhuvan Arora, Rahul Bose",
-            description: "The gripping real-life chronicle of Major Mukund Varadarajan (AC), an Indian Army officer who laid down his life leading a counter-terrorism operation in Kashmir.",
-            posterUrl: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=600&q=80",
-            backdropUrl: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80",
-            trailerUrl: "https://www.youtube.com",
-            featured: true
-        },
-        {
-            id: "MOV-004",
+            tamilTitle: "ஜனநாயகன்",
+            englishTitle: "Jana Nayagan (Thalapathy 69)",
             title: "Jana Nayagan (Thalapathy 69)",
+            releaseCategory: "August 2026",
+            releaseCategoryLabel: "Released This Month – Aug 2026",
             language: "Tamil",
             genre: "Political / Action / Drama",
             duration: "2h 50m",
             certification: "U/A",
             rating: 9.4,
-            votes: "182.6K",
-            releaseDate: "Oct 2025",
+            votes: "192.3K",
+            releaseDate: "15 Aug 2026",
             startingPrice: 190,
             status: "Now Showing",
             director: "H. Vinoth",
             cast: "Thalapathy Vijay, Pooja Hegde, Bobby Deol, Gautham Vasudev Menon, Priyamani, Prakash Raj",
-            description: "A charismatic people's leader rises against systemic injustice and corporate political collusion. An Anirudh musical spectacle produced by KVN Productions.",
+            description: "A charismatic visionary people's leader takes on deep-rooted systemic corruption and corporate political nexus. An Anirudh musical spectacle produced by KVN Productions.",
             posterUrl: "assets/jana_nayagan_poster.png",
             backdropUrl: "assets/jana_nayagan_poster.png",
             trailerUrl: "https://www.youtube.com",
             featured: true
         },
         {
-            id: "MOV-005",
+            id: "MOV-003",
+            tamilTitle: "இதயம் முரளி",
+            englishTitle: "Idhayam Murali",
             title: "Idhayam Murali",
+            releaseCategory: "August 2026",
+            releaseCategoryLabel: "Released This Month – Aug 2026",
             language: "Tamil",
             genre: "Romantic / Comedy / Drama",
             duration: "2h 25m",
             certification: "U",
-            rating: 8.5,
-            votes: "76.2K",
-            releaseDate: "2025",
+            rating: 8.6,
+            votes: "84.1K",
+            releaseDate: "08 Aug 2026",
             startingPrice: 150,
             status: "Now Showing",
             director: "Aakash Baskaran",
             cast: "Atharvaa Murali, Preethi Asrani, VTV Ganesh, Karunakaran",
-            description: "A heartwarming and humorous tale of unrequited one-sided love and enduring friendship. A Thaman S musical presented by Dawn Pictures.",
+            description: "A heartwarming, laugh-out-loud comedy about true one-sided love and unwavering friendship. A Thaman S musical presented by Dawn Pictures.",
             posterUrl: "assets/idhayam_murali_poster.png",
             backdropUrl: "assets/idhayam_murali_poster.png",
+            trailerUrl: "https://www.youtube.com",
+            featured: false
+        },
+        {
+            id: "MOV-004",
+            tamilTitle: "வாழை",
+            englishTitle: "Vaazhai",
+            title: "Vaazhai",
+            releaseCategory: "August 2026",
+            releaseCategoryLabel: "Released This Month – Aug 2026",
+            language: "Tamil",
+            genre: "Drama / Social / Realism",
+            duration: "2h 15m",
+            certification: "U",
+            rating: 9.1,
+            votes: "68.7K",
+            releaseDate: "23 Aug 2026",
+            startingPrice: 140,
+            status: "Now Showing",
+            director: "Mari Selvaraj",
+            cast: "Ponvel, Raghul, Kalaiyarasan, Nikhila Vimal, J. Satish Kumar",
+            description: "A deeply moving tale based on the childhood memories of director Mari Selvaraj, exploring innocent dreams and hardships of plantain farm workers. Music by Santhosh Narayanan.",
+            posterUrl: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=600&q=80",
+            backdropUrl: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80",
+            trailerUrl: "https://www.youtube.com",
+            featured: false
+        },
+        {
+            id: "MOV-005",
+            tamilTitle: "கொட்டுக்காளி",
+            englishTitle: "Kottukkaali (The Rooster)",
+            title: "Kottukkaali",
+            releaseCategory: "August 2026",
+            releaseCategoryLabel: "Released This Month – Aug 2026",
+            language: "Tamil",
+            genre: "Drama / Thriller",
+            duration: "1h 45m",
+            certification: "U/A",
+            rating: 8.7,
+            votes: "52.4K",
+            releaseDate: "23 Aug 2026",
+            startingPrice: 130,
+            status: "Now Showing",
+            director: "P. S. Vinothraj",
+            cast: "Soori, Anna Ben",
+            description: "A young woman's defiance against family patriarchal traditions triggers an intense road journey across rural Tamil Nadu. Acclaimed at Berlin International Film Festival.",
+            posterUrl: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80",
+            backdropUrl: "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=1200&q=80",
+            trailerUrl: "https://www.youtube.com",
+            featured: false
+        },
+
+        // ==========================================
+        // 2. RELEASED LAST MONTH – JULY 2026
+        // ==========================================
+        {
+            id: "MOV-006",
+            tamilTitle: "வேட்டையன்",
+            englishTitle: "Vettaiyan",
+            title: "Vettaiyan",
+            releaseCategory: "July 2026",
+            releaseCategoryLabel: "Released Last Month – Jul 2026",
+            language: "Tamil",
+            genre: "Action / Crime / Drama",
+            duration: "2h 48m",
+            certification: "U/A",
+            rating: 8.7,
+            votes: "135.2K",
+            releaseDate: "25 Jul 2026",
+            startingPrice: 160,
+            status: "Now Showing",
+            director: "T. J. Gnanavel",
+            cast: "Superstar Rajinikanth, Amitabh Bachchan, Fahadh Faasil, Rana Daggubati, Manju Warrier",
+            description: "A decorated encounter specialist encounters moral questions when unearthing a deep-seated scam in educational and corporate institutions. An Anirudh musical.",
+            posterUrl: "assets/vettaiyan_poster.jpg",
+            backdropUrl: "assets/vettaiyan_poster.jpg",
+            trailerUrl: "https://www.youtube.com",
+            featured: true
+        },
+        {
+            id: "MOV-007",
+            tamilTitle: "அமரன்",
+            englishTitle: "Amaran",
+            title: "Amaran",
+            releaseCategory: "July 2026",
+            releaseCategoryLabel: "Released Last Month – Jul 2026",
+            language: "Tamil",
+            genre: "Biographical / Action / Drama",
+            duration: "2h 49m",
+            certification: "U/A",
+            rating: 9.3,
+            votes: "185.8K",
+            releaseDate: "18 Jul 2026",
+            startingPrice: 150,
+            status: "Now Showing",
+            director: "Rajkumar Periasamy",
+            cast: "Sivakarthikeyan, Sai Pallavi, Bhuvan Arora, Rahul Bose, Geetha Kailasam",
+            description: "The gripping real-life chronicle of Major Mukund Varadarajan (Ashoka Chakra), an Indian Army officer who led heroic counter-terrorism operations with the 44 Rashtriya Rifles.",
+            posterUrl: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=600&q=80",
+            backdropUrl: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1200&q=80",
+            trailerUrl: "https://www.youtube.com",
+            featured: true
+        },
+        {
+            id: "MOV-008",
+            tamilTitle: "ராயன்",
+            englishTitle: "Raayan",
+            title: "Raayan",
+            releaseCategory: "July 2026",
+            releaseCategoryLabel: "Released Last Month – Jul 2026",
+            language: "Tamil",
+            genre: "Action / Crime / Revenge",
+            duration: "2h 25m",
+            certification: "A",
+            rating: 8.5,
+            votes: "120.4K",
+            releaseDate: "26 Jul 2026",
+            startingPrice: 150,
+            status: "Now Showing",
+            director: "Dhanush",
+            cast: "Dhanush, S. J. Suryah, Sundeep Kishan, Kalidas Jayaram, Dushara Vijayan, Selvaraghavan",
+            description: "A fast-food cook with a lethal past is dragged back into the ruthless North Chennai underworld when his brothers get embroiled in gang violence. Music by A. R. Rahman.",
+            posterUrl: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=600&q=80",
+            backdropUrl: "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?auto=format&fit=crop&w=1200&q=80",
+            trailerUrl: "https://www.youtube.com",
+            featured: false
+        },
+        {
+            id: "MOV-009",
+            tamilTitle: "மகாராஜா",
+            englishTitle: "Maharaja",
+            title: "Maharaja",
+            releaseCategory: "July 2026",
+            releaseCategoryLabel: "Released Last Month – Jul 2026",
+            language: "Tamil",
+            genre: "Action / Mystery / Thriller",
+            duration: "2h 21m",
+            certification: "U/A",
+            rating: 9.0,
+            votes: "160.2K",
+            releaseDate: "12 Jul 2026",
+            startingPrice: 140,
+            status: "Now Showing",
+            director: "Nithilan Saminathan",
+            cast: "Vijay Sethupathi, Anurag Kashyap, Mamta Mohandas, Natty (Natraj), Abhirami",
+            description: "A humble barber embarks on an unyielding quest to recover his stolen dustbin named Lakshmi, unraveling a sinister crime syndicate.",
+            posterUrl: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80",
+            backdropUrl: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1200&q=80",
+            trailerUrl: "https://www.youtube.com",
+            featured: false
+        },
+        {
+            id: "MOV-010",
+            tamilTitle: "கருடன்",
+            englishTitle: "Garudan",
+            title: "Garudan",
+            releaseCategory: "July 2026",
+            releaseCategoryLabel: "Released Last Month – Jul 2026",
+            language: "Tamil",
+            genre: "Action / Rural Drama",
+            duration: "2h 14m",
+            certification: "U/A",
+            rating: 8.4,
+            votes: "95.1K",
+            releaseDate: "05 Jul 2026",
+            startingPrice: 130,
+            status: "Now Showing",
+            director: "R. S. Durai Senthilkumar",
+            cast: "Soori, M. Sasikumar, Unni Mukundan, Revathi Sharma, Samuthirakani",
+            description: "An extraordinarily loyal confidant finds himself torn between two childhood brothers when land disputes and greed threaten to tear their village apart.",
+            posterUrl: "https://images.unsplash.com/photo-1616530940355-351fabd9524b?auto=format&fit=crop&w=600&q=80",
+            backdropUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
             trailerUrl: "https://www.youtube.com",
             featured: false
         }
     ],
 
-    // Theatres across key Tamil Nadu & South Indian Cities
+    // Theatres across key Tamil Nadu Cities
     theatres: [
         {
             id: "THT-001",
@@ -158,20 +305,11 @@ const CineWaveInitialData = {
         },
         {
             id: "THT-006",
-            name: "CineWave Superplex – Bengaluru",
-            location: "Bengaluru",
-            address: "Phoenix Marketcity, Whitefield, Bengaluru - 560048",
-            screens: ["Screen 1 – IMAX GT", "Screen 2 – VIP Director's Cut", "Screen 3 – 4DX Atmos"],
-            facilities: ["IMAX 12-Channel", "VIP Butler Service", "4DX Dynamic", "Ultra HD Projection"],
-            status: "Active"
-        },
-        {
-            id: "THT-007",
-            name: "CineWave MegaScreen – Hyderabad",
-            location: "Hyderabad",
-            address: "Inorbit Mall, Hitech City, Hyderabad - 500081",
-            screens: ["Screen 1 – BigScreen Atmos", "Screen 2 – Recliner Club", "Screen 3 – IMAX 3D"],
-            facilities: ["Dual Laser IMAX", "Dolby Atmos 128-Track", "Live Kitchen", "Free Wi-Fi"],
+            name: "CineWave ARRS Cineplex – Salem",
+            location: "Salem",
+            address: "Meyyanur Bypass, Salem - 636004",
+            screens: ["Screen 1 – Dolby 4K Laser", "Screen 2 – CineWave Atmos"],
+            facilities: ["RGB 4K Laser", "Dolby 7.1 Surround", "Wide Armchair Seating", "Food Hub"],
             status: "Active"
         }
     ],
@@ -187,8 +325,9 @@ const CineWaveInitialData = {
         { id: "SCR-007", name: "Screen 1 – IMAX 3D", theatreId: "THT-003", type: "IMAX", totalSeats: 48, rows: ["A", "B", "C", "D", "E", "F", "G", "H"], cols: 6 }
     ],
 
-    // Active Shows data object
+    // Active Shows across movies
     shows: [
+        // GOAT Shows (MOV-001)
         {
             id: "SHW-101",
             movieId: "MOV-001",
@@ -231,65 +370,10 @@ const CineWaveInitialData = {
             bookedSeats: ["A1","A2","A3","A4","A5","A6","B1","B2","B3","B4","B5","B6","C1","C2","C3","C4","C5","C6","D1","D2","D3","D4","D5","D6","E1","E2","E3","E4","E5","E6","F1","F2","F3","F4","F5","F6","G1","G2","G3","G4","G5","G6","H1","H2","H3","H4","H5","H6"],
             status: "Sold Out"
         },
+        // Jana Nayagan Shows (MOV-002)
         {
             id: "SHW-104",
             movieId: "MOV-002",
-            theatreId: "THT-001",
-            screenId: "SCR-002",
-            date: "2026-08-28",
-            startTime: "11:15 AM",
-            endTime: "02:03 PM",
-            showType: "Regular",
-            ticketPrice: 190,
-            totalSeats: 48,
-            bookedSeats: ["A3", "A4", "B1", "B2", "C5", "C6", "E3", "E4"],
-            status: "Available"
-        },
-        {
-            id: "SHW-105",
-            movieId: "MOV-002",
-            theatreId: "THT-001",
-            screenId: "SCR-004",
-            date: "2026-08-28",
-            startTime: "06:30 PM",
-            endTime: "09:18 PM",
-            showType: "Recliner",
-            ticketPrice: 350,
-            totalSeats: 48,
-            bookedSeats: ["G1", "G2", "H1", "H2", "H3"],
-            status: "Available"
-        },
-        {
-            id: "SHW-106",
-            movieId: "MOV-003",
-            theatreId: "THT-002",
-            screenId: "SCR-005",
-            date: "2026-08-28",
-            startTime: "10:00 AM",
-            endTime: "12:49 PM",
-            showType: "Regular",
-            ticketPrice: 160,
-            totalSeats: 48,
-            bookedSeats: ["A1", "A2", "B1", "B2", "C3", "C4"],
-            status: "Available"
-        },
-        {
-            id: "SHW-107",
-            movieId: "MOV-003",
-            theatreId: "THT-002",
-            screenId: "SCR-006",
-            date: "2026-08-28",
-            startTime: "07:30 PM",
-            endTime: "10:19 PM",
-            showType: "IMAX",
-            ticketPrice: 280,
-            totalSeats: 48,
-            bookedSeats: ["A1", "A2", "C1", "C2", "D3", "D4", "E1", "E2", "E3", "F4", "F5"],
-            status: "Available"
-        },
-        {
-            id: "SHW-111",
-            movieId: "MOV-004",
             theatreId: "THT-001",
             screenId: "SCR-001",
             date: "2026-08-28",
@@ -302,8 +386,8 @@ const CineWaveInitialData = {
             status: "Available"
         },
         {
-            id: "SHW-112",
-            movieId: "MOV-004",
+            id: "SHW-105",
+            movieId: "MOV-002",
             theatreId: "THT-002",
             screenId: "SCR-006",
             date: "2026-08-28",
@@ -315,23 +399,10 @@ const CineWaveInitialData = {
             bookedSeats: ["A1", "A2", "D1", "D2", "E1", "E2"],
             status: "Available"
         },
+        // Idhayam Murali Shows (MOV-003)
         {
-            id: "SHW-113",
-            movieId: "MOV-004",
-            theatreId: "THT-003",
-            screenId: "SCR-007",
-            date: "2026-08-28",
-            startTime: "09:30 PM",
-            endTime: "12:20 AM",
-            showType: "VIP",
-            ticketPrice: 350,
-            totalSeats: 48,
-            bookedSeats: ["A3", "A4", "B5", "B6"],
-            status: "Available"
-        },
-        {
-            id: "SHW-114",
-            movieId: "MOV-005",
+            id: "SHW-106",
+            movieId: "MOV-003",
             theatreId: "THT-001",
             screenId: "SCR-002",
             date: "2026-08-28",
@@ -344,8 +415,8 @@ const CineWaveInitialData = {
             status: "Available"
         },
         {
-            id: "SHW-115",
-            movieId: "MOV-005",
+            id: "SHW-107",
+            movieId: "MOV-003",
             theatreId: "THT-004",
             screenId: "SCR-001",
             date: "2026-08-28",
@@ -357,23 +428,142 @@ const CineWaveInitialData = {
             bookedSeats: ["B1", "B2", "D3", "D4"],
             status: "Available"
         },
+        // Vaazhai Shows (MOV-004)
         {
-            id: "SHW-116",
+            id: "SHW-108",
+            movieId: "MOV-004",
+            theatreId: "THT-002",
+            screenId: "SCR-005",
+            date: "2026-08-28",
+            startTime: "04:30 PM",
+            endTime: "06:45 PM",
+            showType: "Regular",
+            ticketPrice: 150,
+            totalSeats: 48,
+            bookedSeats: ["A1", "A2", "C1", "C2"],
+            status: "Available"
+        },
+        // Kottukkaali Shows (MOV-005)
+        {
+            id: "SHW-109",
             movieId: "MOV-005",
-            theatreId: "THT-005",
+            theatreId: "THT-004",
             screenId: "SCR-001",
             date: "2026-08-28",
-            startTime: "09:00 PM",
-            endTime: "11:25 PM",
+            startTime: "09:15 PM",
+            endTime: "11:00 PM",
             showType: "Regular",
             ticketPrice: 140,
             totalSeats: 48,
-            bookedSeats: ["A1", "A2", "C3", "C4"],
+            bookedSeats: ["A3", "A4"],
+            status: "Available"
+        },
+        // Vettaiyan Shows (MOV-006)
+        {
+            id: "SHW-110",
+            movieId: "MOV-006",
+            theatreId: "THT-001",
+            screenId: "SCR-002",
+            date: "2026-08-28",
+            startTime: "05:00 PM",
+            endTime: "07:48 PM",
+            showType: "Regular",
+            ticketPrice: 190,
+            totalSeats: 48,
+            bookedSeats: ["A3", "A4", "B1", "B2", "C5", "C6", "E3", "E4"],
+            status: "Available"
+        },
+        {
+            id: "SHW-111",
+            movieId: "MOV-006",
+            theatreId: "THT-001",
+            screenId: "SCR-004",
+            date: "2026-08-28",
+            startTime: "08:30 PM",
+            endTime: "11:18 PM",
+            showType: "Recliner",
+            ticketPrice: 350,
+            totalSeats: 48,
+            bookedSeats: ["G1", "G2", "H1", "H2", "H3"],
+            status: "Available"
+        },
+        // Amaran Shows (MOV-007)
+        {
+            id: "SHW-112",
+            movieId: "MOV-007",
+            theatreId: "THT-002",
+            screenId: "SCR-005",
+            date: "2026-08-28",
+            startTime: "10:00 AM",
+            endTime: "12:49 PM",
+            showType: "Regular",
+            ticketPrice: 160,
+            totalSeats: 48,
+            bookedSeats: ["A1", "A2", "B1", "B2", "C3", "C4"],
+            status: "Available"
+        },
+        {
+            id: "SHW-113",
+            movieId: "MOV-007",
+            theatreId: "THT-002",
+            screenId: "SCR-006",
+            date: "2026-08-28",
+            startTime: "07:30 PM",
+            endTime: "10:19 PM",
+            showType: "IMAX",
+            ticketPrice: 280,
+            totalSeats: 48,
+            bookedSeats: ["A1", "A2", "C1", "C2", "D3", "D4", "E1", "E2", "E3", "F4", "F5"],
+            status: "Available"
+        },
+        // Raayan Shows (MOV-008)
+        {
+            id: "SHW-114",
+            movieId: "MOV-008",
+            theatreId: "THT-003",
+            screenId: "SCR-007",
+            date: "2026-08-28",
+            startTime: "07:15 PM",
+            endTime: "09:40 PM",
+            showType: "IMAX",
+            ticketPrice: 260,
+            totalSeats: 48,
+            bookedSeats: ["A1", "A2", "B1", "B2"],
+            status: "Available"
+        },
+        // Maharaja Shows (MOV-009)
+        {
+            id: "SHW-115",
+            movieId: "MOV-009",
+            theatreId: "THT-005",
+            screenId: "SCR-001",
+            date: "2026-08-28",
+            startTime: "06:30 PM",
+            endTime: "08:51 PM",
+            showType: "Regular",
+            ticketPrice: 140,
+            totalSeats: 48,
+            bookedSeats: ["A1", "A2", "B3", "B4"],
+            status: "Available"
+        },
+        // Garudan Shows (MOV-010)
+        {
+            id: "SHW-116",
+            movieId: "MOV-010",
+            theatreId: "THT-006",
+            screenId: "SCR-001",
+            date: "2026-08-28",
+            startTime: "08:00 PM",
+            endTime: "10:14 PM",
+            showType: "Regular",
+            ticketPrice: 140,
+            totalSeats: 48,
+            bookedSeats: ["C1", "C2", "D3", "D4"],
             status: "Available"
         }
     ],
 
-    // Existing Pega Cases to demonstrate Work Queues, Routing, SLA, and Lifecycle
+    // Existing Pega Cases
     cases: [
         {
             pyID: "C-1001",
@@ -385,6 +575,7 @@ const CineWaveInitialData = {
             mobile: "+91 98401 23456",
             movieId: "MOV-001",
             movieTitle: "The Greatest of All Time (GOAT)",
+            tamilTitle: "தி கிரேட்டஸ்ட் ஆஃப் ஆல் டைம்",
             theatreId: "THT-001",
             theatreName: "CineWave Luxe Cinemas – Chennai",
             location: "Chennai",
@@ -404,7 +595,7 @@ const CineWaveInitialData = {
             taxAmount: 151.2,
             totalAmount: 1071.2,
             pyStatusWork: "Resolved-Completed",
-            currentStageIndex: 7, // Notify Customer / Completed
+            currentStageIndex: 7,
             assignedWorkbasket: "Premium Cinema Team",
             routingReason: "Auto-routed via US-010: Show Type = IMAX -> Premium Cinema Team",
             createdAt: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
@@ -432,14 +623,15 @@ const CineWaveInitialData = {
             customerName: "Kathirvel T",
             email: "kathirvel.dev@cinewave.in",
             mobile: "+91 94432 98765",
-            movieId: "MOV-002",
+            movieId: "MOV-006",
             movieTitle: "Vettaiyan",
+            tamilTitle: "வேட்டையன்",
             theatreId: "THT-002",
             theatreName: "CineWave Grand Cineplex – Madurai",
             location: "Madurai",
             screenId: "SCR-006",
             screenName: "Screen 2 – IMAX Grand",
-            showId: "SHW-107",
+            showId: "SHW-113",
             showDate: "2026-08-28",
             showTime: "07:30 PM",
             showType: "IMAX",
@@ -478,14 +670,15 @@ const CineWaveInitialData = {
             customerName: "Praveen Kumar",
             email: "praveen.k@gmail.com",
             mobile: "+91 97890 54321",
-            movieId: "MOV-003",
+            movieId: "MOV-007",
             movieTitle: "Amaran",
+            tamilTitle: "அமரன்",
             theatreId: "THT-001",
             theatreName: "CineWave Luxe Cinemas – Chennai",
             location: "Chennai",
             screenId: "SCR-004",
             screenName: "Screen 4 – VIP Gold Class",
-            showId: "SHW-105",
+            showId: "SHW-111",
             showDate: "2026-08-28",
             showTime: "06:30 PM",
             showType: "Recliner",
@@ -499,7 +692,7 @@ const CineWaveInitialData = {
             taxAmount: 176.4,
             totalAmount: 1236.4,
             pyStatusWork: "Pending-Review",
-            currentStageIndex: 3, // Review Booking Details
+            currentStageIndex: 3,
             assignedWorkbasket: "Premium Seating Team",
             routingReason: "Auto-routed via US-010: Show Type = Recliner -> Premium Seating Team",
             createdAt: new Date(Date.now() - 14 * 60 * 1000).toISOString(),
@@ -515,62 +708,18 @@ const CineWaveInitialData = {
                 { time: "12 mins ago", actor: "Pega Router", action: "Routed to 'Premium Seating Team' (US-010)", stage: "Route Case" },
                 { time: "4 mins ago", actor: "SLA Monitor", action: "SLA Goal passed (10m). Urgency increased to 65. Warning badge set.", stage: "SLA Escalation" }
             ]
-        },
-        {
-            pyID: "C-1004",
-            bookingId: "CW20260828004",
-            ticketId: "",
-            customerId: "CUST-004",
-            customerName: "Senthil Nathan",
-            email: "senthil.n@outlook.com",
-            mobile: "+91 99400 11223",
-            movieId: "MOV-004",
-            movieTitle: "Jana Nayagan (Thalapathy 69)",
-            theatreId: "THT-003",
-            screenId: "SCR-007",
-            theatreName: "CineWave Platinum – Coimbatore",
-            location: "Coimbatore",
-            screenName: "Screen 1 – IMAX 3D",
-            showId: "SHW-113",
-            showDate: "2026-08-28",
-            showTime: "09:30 PM",
-            showType: "VIP",
-            ticketCategory: "VIP",
-            ticketCount: 3,
-            seats: ["A1", "A2", "A3"],
-            ticketPrice: 350,
-            categoryMultiplier: 1.5,
-            subtotal: 1575,
-            convenienceFee: 120,
-            taxAmount: 283.5,
-            totalAmount: 1978.5,
-            pyStatusWork: "Pending-Review",
-            currentStageIndex: 3, // Review Booking Details
-            assignedWorkbasket: "VIP Booking Team",
-            routingReason: "Auto-routed via US-010: Show Type = VIP -> VIP Booking Team",
-            createdAt: new Date(Date.now() - 34 * 60 * 1000).toISOString(),
-            slaGoalMinutes: 10,
-            slaDeadlineMinutes: 30,
-            urgency: 95,
-            slaStatus: "SLA Breached",
-            rejectionReason: "",
-            auditTrail: [
-                { time: "34 mins ago", actor: "Senthil Nathan", action: "Created VIP case", stage: "Submit Booking Request" },
-                { time: "33 mins ago", actor: "Pega Router", action: "Routed to 'VIP Booking Team'", stage: "Route Case" },
-                { time: "4 mins ago", actor: "SLA Monitor", action: "DEADLINE BREACHED (30m+). Urgency set to 95. Escalated to Manager.", stage: "SLA Escalation" }
-            ]
         }
     ],
 
-    // Routing Workbaskets Definition (US-010)
+    // Routing Workbaskets
     workbaskets: [
         { id: "WB-IMAX", name: "Premium Cinema Team", showType: "IMAX", description: "Specialized team managing high-tier IMAX Screen experiences", count: 1 },
-        { id: "WB-VIP", name: "VIP Booking Team", showType: "VIP", description: "Handles 4DX, VIP Lounge and special requests", count: 1 },
+        { id: "WB-VIP", name: "VIP Booking Team", showType: "VIP", description: "Handles 4DX, VIP Lounge and special requests", count: 0 },
         { id: "WB-RECLINER", name: "Premium Seating Team", showType: "Recliner", description: "Oversees Gold Class and Recliner Loungers", count: 1 },
         { id: "WB-REGULAR", name: "Standard Booking Team", showType: "Regular", description: "Standard Dolby Atmos & 2K screens bookings", count: 0 }
     ],
 
-    // SLA Rules Specification (US-009)
+    // SLA Rules
     slaConfig: {
         goalMinutes: 10,
         deadlineMinutes: 30,
@@ -590,12 +739,12 @@ const CineWaveInitialData = {
         { index: 2, name: "Calculate Booking Cost", desc: "US-003: Automated Pricing Formula" },
         { index: 3, name: "Review Booking Details", desc: "US-006: Staff Review & Case Routing (US-010)" },
         { index: 4, name: "Customer Confirmation", desc: "US-004: Mandatory Customer Review & Ack" },
-        { index: 5, name: "Process Ticket Booking", desc: "US-007: Seat Locking & Case Escalation" },
-        { index: 6, name: "Generate Ticket", desc: "US-007 / Sec 19: Digital QR Ticket Generation" },
+        { index: 5, name: "Process Ticket Booking", desc: "US-007: Seat Locking & Payment Processing" },
+        { index: 6, name: "Generate Ticket", desc: "Digital QR Ticket & Confirmation" },
         { index: 7, name: "Notify Customer", desc: "US-008: Multi-channel SMS/Email/In-App Alert" }
     ],
 
-    // Simulated notifications
+    // Notifications
     notifications: [
         {
             id: "NOTIF-1",

@@ -1,6 +1,6 @@
 /**
- * CineWave Entertainment - Pega Movie Ticket Booking Management Application
- * Complete Interactive Application Controller
+ * CineWave Entertainment - Tamil Movie Ticket Booking Management Application
+ * Complete Interactive Application Controller with August & July 2026 Sections
  * Designed & Developed by Kathirvel T
  */
 
@@ -8,6 +8,7 @@ class CineWaveApp {
     constructor() {
         this.currentView = "home";
         this.selectedMovieId = "MOV-001";
+        this.selectedLocation = "";
         this.selectedTheatreId = "THT-001";
         this.selectedShowId = "SHW-101";
         this.selectedSeats = [];
@@ -19,17 +20,13 @@ class CineWaveApp {
     }
 
     init() {
-        console.log("Initializing CineWave Entertainment Pega Application... Crafted by Kathirvel T");
+        console.log("Initializing CineWave Tamil Movie Booking Platform... Designed by Kathirvel T");
         this.bindEvents();
         this.renderAllViews();
         this.startSlaTimer();
     }
 
-    // ==========================================
-    // EVENT BINDINGS & VIEW NAVIGATION
-    // ==========================================
     bindEvents() {
-        // Close dropdowns on outside click
         window.addEventListener("click", (e) => {
             const roleMenu = document.getElementById("roleDropdownMenu");
             const roleBtn = document.getElementById("roleSwitcherBtn");
@@ -41,25 +38,17 @@ class CineWaveApp {
 
     navigateView(viewName) {
         this.currentView = viewName;
-        
-        // Hide all views
         document.querySelectorAll(".app-view").forEach(v => v.style.display = "none");
 
-        // Deactivate all nav buttons
         document.querySelectorAll(".nav-item-btn").forEach(btn => {
             btn.classList.remove("active");
             if (btn.dataset.nav === viewName) btn.classList.add("active");
         });
 
-        // Show target view
         switch (viewName) {
             case "home":
                 document.getElementById("viewHome").style.display = "block";
-                this.renderMoviesGrid();
-                break;
-            case "movies":
-                document.getElementById("viewMovies").style.display = "block";
-                this.renderAllMoviesGrid();
+                this.renderTamilMovieSections();
                 break;
             case "theatres":
                 document.getElementById("viewTheatres").style.display = "block";
@@ -73,17 +62,22 @@ class CineWaveApp {
                 document.getElementById("viewPegaPortal").style.display = "block";
                 this.renderPegaPortal();
                 break;
-            case "architecture":
-                document.getElementById("viewArchitecture").style.display = "block";
-                break;
         }
 
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
+    scrollToSection(sectionId) {
+        this.navigateView("home");
+        setTimeout(() => {
+            const el = document.getElementById(sectionId);
+            if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+    }
+
     renderAllViews() {
         this.renderHero();
-        this.renderMoviesGrid();
+        this.renderTamilMovieSections();
         this.renderTheatresGrid();
         this.renderMyBookings();
         this.renderNotifications();
@@ -103,7 +97,6 @@ class CineWaveApp {
         document.getElementById("currentRoleLabel").textContent = roleName;
         document.getElementById("currentRoleAvatar").textContent = roleName.charAt(0);
         
-        // Update options
         document.querySelectorAll(".role-option").forEach(opt => {
             opt.classList.remove("selected");
             if (opt.textContent.includes(roleName)) opt.classList.add("selected");
@@ -111,7 +104,6 @@ class CineWaveApp {
 
         document.getElementById("roleDropdownMenu").classList.remove("show");
 
-        // Role-based redirect if helpful
         if (roleName === "Booking Staff" || roleName === "Cinema Manager" || roleName === "Administrator") {
             this.navigateView("pega-portal");
         } else {
@@ -122,7 +114,7 @@ class CineWaveApp {
     }
 
     // ==========================================
-    // HERO & MOVIES RENDERING (Section 2, 3, 22)
+    // HERO SHOWCASE
     // ==========================================
     renderHero() {
         const featured = window.pegaEngine.getMovies().find(m => m.featured) || window.pegaEngine.getMovies()[0];
@@ -133,114 +125,118 @@ class CineWaveApp {
             banner.style.backgroundImage = `url('${featured.backdropUrl}')`;
         }
 
-        document.getElementById("heroMovieTitle").textContent = featured.title;
+        document.getElementById("heroTamilTitle").textContent = featured.tamilTitle || featured.title;
+        document.getElementById("heroMovieTitle").textContent = featured.englishTitle || featured.title;
         document.getElementById("heroRating").textContent = featured.rating;
         document.getElementById("heroCert").textContent = featured.certification;
         document.getElementById("heroDuration").textContent = featured.duration;
-        document.getElementById("heroLang").textContent = featured.language;
+        document.getElementById("heroLang").textContent = `${featured.language} (தமிழ்)`;
         document.getElementById("heroGenre").textContent = featured.genre;
         document.getElementById("heroDescription").textContent = featured.description;
     }
 
-    renderMoviesGrid(filteredList = null) {
-        const movies = filteredList || window.pegaEngine.getMovies();
-        const container = document.getElementById("moviesGridContainer");
-        if (!container) return;
+    // ==========================================
+    // DYNAMIC TAMIL MOVIES SECTIONS
+    // 1. Released This Month – August 2026
+    // 2. Released Last Month – July 2026
+    // ==========================================
+    renderTamilMovieSections(filteredList = null) {
+        let allMovies = filteredList || window.pegaEngine.getMovies();
 
-        if (movies.length === 0) {
-            container.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-muted);">
-                    <i class="fa-solid fa-film-slash" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                    <h3>No movies found matching the selected criteria</h3>
-                    <p>Try adjusting your search query, location or language filter.</p>
-                </div>
-            `;
-            return;
+        // Apply sorting
+        const sortBy = document.getElementById("sortBySelect")?.value || "date-desc";
+        if (sortBy === "rating-desc") {
+            allMovies.sort((a, b) => b.rating - a.rating);
+        } else if (sortBy === "title-asc") {
+            allMovies.sort((a, b) => (a.tamilTitle || a.title).localeCompare(b.tamilTitle || b.title));
         }
 
-        container.innerHTML = movies.map(movie => `
+        const augustMovies = allMovies.filter(m => m.releaseCategory === "August 2026");
+        const julyMovies = allMovies.filter(m => m.releaseCategory === "July 2026");
+
+        const augContainer = document.getElementById("augustMoviesGrid");
+        const julContainer = document.getElementById("julyMoviesGrid");
+
+        if (augContainer) {
+            if (augustMovies.length === 0) {
+                augContainer.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">No August 2026 Tamil releases match the selected filter.</div>`;
+            } else {
+                augContainer.innerHTML = augustMovies.map(movie => this.buildMovieCardHtml(movie, "Aug 2026 Release")).join("");
+            }
+        }
+
+        if (julContainer) {
+            if (julyMovies.length === 0) {
+                julContainer.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem;">No July 2026 Tamil releases match the selected filter.</div>`;
+            } else {
+                julContainer.innerHTML = julyMovies.map(movie => this.buildMovieCardHtml(movie, "Jul 2026 Superhit")).join("");
+            }
+        }
+    }
+
+    buildMovieCardHtml(movie, categoryBadge) {
+        return `
             <div class="movie-card">
                 <div class="movie-poster-wrap">
-                    <img src="${movie.posterUrl}" alt="${movie.title}" class="movie-poster-img" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80'">
+                    <img src="${movie.posterUrl}" alt="${movie.englishTitle || movie.title}" class="movie-poster-img" loading="lazy">
                     <div class="movie-poster-overlay"></div>
-                    <div class="movie-badge-lang">${movie.language} • ${movie.certification}</div>
+                    <div class="movie-badge-lang">${movie.certification} • ${movie.language}</div>
+                    <div style="position: absolute; top: 1rem; right: 1rem; background: rgba(255, 183, 3, 0.2); border: 1px solid var(--border-gold); color: var(--accent-gold); padding: 0.25rem 0.65rem; border-radius: var(--radius-full); font-size: 0.7rem; font-weight: 700;">
+                        ${categoryBadge}
+                    </div>
                     <div class="movie-card-rating">
                         <span class="rating-badge"><i class="fa-solid fa-star"></i> ${movie.rating}</span>
-                        <span style="font-size: 0.75rem; color: #e2e8f0;">${movie.votes} votes</span>
+                        <span style="font-size: 0.75rem; color: #e2e8f0;">${movie.votes}</span>
                     </div>
                 </div>
                 <div class="movie-info-body">
                     <div>
-                        <h3 class="movie-card-title">${movie.title}</h3>
+                        <div style="font-size: 0.9rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 2px;">${movie.tamilTitle}</div>
+                        <h3 class="movie-card-title">${movie.englishTitle || movie.title}</h3>
                         <div class="movie-card-genre">${movie.genre}</div>
+                        <div style="font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 0.5rem;"><i class="fa-regular fa-calendar"></i> Release: ${movie.releaseDate}</div>
+                        <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">
+                            ${movie.description}
+                        </p>
                         <div class="movie-card-meta-row">
                             <span><i class="fa-regular fa-clock"></i> ${movie.duration}</span>
                             <span class="movie-price-tag"><span>Starts at</span> ₹${movie.startingPrice}</span>
                         </div>
                     </div>
-                    <button class="btn-book-card" onclick="app.openBookingWizard('${movie.id}')">
-                        <i class="fa-solid fa-ticket"></i> BOOK TICKETS
-                    </button>
-                </div>
-            </div>
-        `).join("");
-    }
-
-    renderAllMoviesGrid() {
-        const movies = window.pegaEngine.getMovies();
-        const container = document.getElementById("allMoviesGrid");
-        if (!container) return;
-
-        container.innerHTML = movies.map(movie => `
-            <div class="movie-card">
-                <div class="movie-poster-wrap">
-                    <img src="${movie.posterUrl}" alt="${movie.title}" class="movie-poster-img" loading="lazy">
-                    <div class="movie-poster-overlay"></div>
-                    <div class="movie-badge-lang">${movie.language} • ${movie.certification}</div>
-                    <div class="movie-card-rating">
-                        <span class="rating-badge"><i class="fa-solid fa-star"></i> ${movie.rating}</span>
+                    <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+                        <button class="btn-book-card" onclick="app.openBookingWizard('${movie.id}')" style="flex: 1.2;">
+                            <i class="fa-solid fa-ticket"></i> BOOK TICKETS
+                        </button>
+                        <button class="btn-action-sm inspect" onclick="app.openMovieDetails('${movie.id}')" style="padding: 0.6rem 0.9rem; border-radius: var(--radius-md);" title="View Movie Details">
+                            <i class="fa-solid fa-circle-info"></i> Details
+                        </button>
                     </div>
                 </div>
-                <div class="movie-info-body">
-                    <div>
-                        <h3 class="movie-card-title">${movie.title}</h3>
-                        <div class="movie-card-genre">${movie.genre}</div>
-                        <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-                            ${movie.description}
-                        </p>
-                        <div class="movie-card-meta-row">
-                            <span><i class="fa-regular fa-clock"></i> ${movie.duration}</span>
-                            <span class="movie-price-tag">₹${movie.startingPrice}</span>
-                        </div>
-                    </div>
-                    <button class="btn-book-card" onclick="app.openBookingWizard('${movie.id}')">
-                        <i class="fa-solid fa-ticket"></i> BOOK NOW
-                    </button>
-                </div>
             </div>
-        `).join("");
+        `;
     }
 
     filterMovies() {
         const searchQuery = (document.getElementById("movieSearchInput")?.value || "").toLowerCase().trim();
+        const categoryFilter = document.getElementById("filterCategory")?.value || "";
         const locationFilter = document.getElementById("filterLocation")?.value || "";
-        const languageFilter = document.getElementById("filterLanguage")?.value || "";
         const genreFilter = document.getElementById("filterGenre")?.value || "";
-        const showTypeFilter = document.getElementById("filterShowType")?.value || "";
 
         let list = window.pegaEngine.getMovies();
 
         if (searchQuery) {
             list = list.filter(m => 
-                m.title.toLowerCase().includes(searchQuery) ||
-                m.cast.toLowerCase().includes(searchQuery) ||
-                m.director.toLowerCase().includes(searchQuery) ||
-                m.genre.toLowerCase().includes(searchQuery)
+                (m.tamilTitle && m.tamilTitle.toLowerCase().includes(searchQuery)) ||
+                (m.englishTitle && m.englishTitle.toLowerCase().includes(searchQuery)) ||
+                (m.title && m.title.toLowerCase().includes(searchQuery)) ||
+                (m.cast && m.cast.toLowerCase().includes(searchQuery)) ||
+                (m.director && m.director.toLowerCase().includes(searchQuery)) ||
+                (m.genre && m.genre.toLowerCase().includes(searchQuery))
             );
         }
 
-        if (languageFilter) {
-            list = list.filter(m => m.language === languageFilter);
+        if (categoryFilter) {
+            list = list.filter(m => m.releaseCategory === categoryFilter);
         }
 
         if (genreFilter) {
@@ -248,18 +244,12 @@ class CineWaveApp {
         }
 
         if (locationFilter) {
-            // Find movies showing in theatres of that location
             const matchingTheatres = window.pegaEngine.getTheatres().filter(t => t.location === locationFilter).map(t => t.id);
             const matchingShows = window.pegaEngine.getShows().filter(s => matchingTheatres.includes(s.theatreId)).map(s => s.movieId);
             list = list.filter(m => matchingShows.includes(m.id));
         }
 
-        if (showTypeFilter) {
-            const matchingShows = window.pegaEngine.getShows().filter(s => s.showType === showTypeFilter).map(s => s.movieId);
-            list = list.filter(m => matchingShows.includes(m.id));
-        }
-
-        this.renderMoviesGrid(list);
+        this.renderTamilMovieSections(list);
     }
 
     filterByLocation(loc) {
@@ -272,7 +262,56 @@ class CineWaveApp {
     }
 
     // ==========================================
-    // THEATRES RENDERING (Section 4)
+    // MOVIE DETAILS MODAL
+    // ==========================================
+    openMovieDetails(movieId) {
+        const movie = window.pegaEngine.getMovieById(movieId);
+        if (!movie) return;
+
+        document.getElementById("detailModalTitle").textContent = `${movie.tamilTitle} (${movie.englishTitle || movie.title})`;
+        document.getElementById("detailModalSubtitle").textContent = `${movie.releaseCategoryLabel || movie.releaseCategory} • ${movie.language} Cinema`;
+
+        const body = document.getElementById("movieDetailsBody");
+        body.innerHTML = `
+            <div style="display: grid; grid-template-columns: 240px 1fr; gap: 1.75rem; margin-bottom: 1.5rem;">
+                <div>
+                    <img src="${movie.posterUrl}" alt="${movie.title}" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-md); aspect-ratio: 2/3; object-fit: cover;">
+                </div>
+                <div>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <span class="rating-badge" style="font-size: 0.9rem;"><i class="fa-solid fa-star"></i> ${movie.rating}/10 (${movie.votes})</span>
+                        <span class="cert-badge">${movie.certification}</span>
+                        <span class="screen-badge"><i class="fa-regular fa-clock"></i> ${movie.duration}</span>
+                        <span class="theatre-loc-pill">📅 ${movie.releaseDate}</span>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <strong style="color: var(--text-gold);">Genre:</strong> <span style="color: var(--text-secondary);">${movie.genre}</span>
+                    </div>
+                    <div style="margin-bottom: 0.75rem;">
+                        <strong style="color: var(--accent-cyan);">Director:</strong> <span style="color: #fff;">${movie.director}</span>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="color: var(--accent-emerald);">Starring:</strong> <span style="color: var(--text-secondary);">${movie.cast}</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1.5rem;">
+                        ${movie.description}
+                    </p>
+                    <button class="btn-primary" onclick="app.closeMovieDetails(); app.openBookingWizard('${movie.id}');">
+                        <i class="fa-solid fa-ticket"></i> Book Tickets for ${movie.tamilTitle}
+                    </button>
+                </div>
+            </div>
+        `;
+
+        document.getElementById("movieDetailsModal").classList.add("open");
+    }
+
+    closeMovieDetails() {
+        document.getElementById("movieDetailsModal").classList.remove("open");
+    }
+
+    // ==========================================
+    // THEATRES RENDERING
     // ==========================================
     renderTheatresGrid() {
         const theatres = window.pegaEngine.getTheatres();
@@ -300,7 +339,8 @@ class CineWaveApp {
     }
 
     // ==========================================
-    // BOOKING WIZARD (US-001, US-002, US-003, US-004, US-007, US-008)
+    // 9-STEP GUIDED BOOKING WIZARD
+    // Movie -> Location -> Theatre -> Date -> Show Time -> Seats -> Customer Details -> Payment -> Confirmation
     // ==========================================
     openBookingWizard(movieId = "MOV-001") {
         this.selectedMovieId = movieId;
@@ -311,9 +351,9 @@ class CineWaveApp {
         document.getElementById("wizardStep2Success").style.display = "none";
         document.getElementById("customerConfirmationCheck").checked = false;
 
-        document.getElementById("wizardMovieTitle").textContent = `Book Tickets: ${movie ? movie.title : 'Cinema'}`;
-        document.getElementById("wizardSubtitle").textContent = `${movie ? movie.language : ''} • ${movie ? movie.genre : ''} • Case Management Workflow`;
-        document.getElementById("wizardCaseIdDisplay").textContent = "New Case Stage 0: Submit Booking Request";
+        document.getElementById("wizardMovieTitle").textContent = `Book Tickets: ${movie ? (movie.tamilTitle + ' (' + movie.englishTitle + ')') : 'Tamil Movie'}`;
+        document.getElementById("wizardSubtitle").textContent = `${movie ? movie.genre : ''} • Pega Case Management Workflow`;
+        document.getElementById("wizardCaseIdDisplay").textContent = "Step 1: Selection & Availability";
 
         this.renderWizardStagesBar(0);
         this.populateWizardDropdowns();
@@ -356,19 +396,31 @@ class CineWaveApp {
     }
 
     populateWizardDropdowns() {
-        // Populate Movies
         const movies = window.pegaEngine.getMovies();
         const movieSelect = document.getElementById("wizardMovieSelect");
         movieSelect.innerHTML = movies.map(m => `
-            <option value="${m.id}" ${m.id === this.selectedMovieId ? 'selected' : ''}>${m.title} (${m.language})</option>
+            <option value="${m.id}" ${m.id === this.selectedMovieId ? 'selected' : ''}>${m.tamilTitle} - ${m.englishTitle || m.title}</option>
         `).join("");
 
-        // Populate Theatres
-        const theatres = window.pegaEngine.getTheatres();
+        this.populateTheatresDropdown();
+    }
+
+    populateTheatresDropdown() {
+        let theatres = window.pegaEngine.getTheatres();
+        if (this.selectedLocation) {
+            theatres = theatres.filter(t => t.location === this.selectedLocation);
+        }
+
         const theatreSelect = document.getElementById("wizardTheatreSelect");
-        theatreSelect.innerHTML = theatres.map(t => `
-            <option value="${t.id}" ${t.id === this.selectedTheatreId ? 'selected' : ''}>${t.name} (${t.location})</option>
-        `).join("");
+        if (theatres.length === 0) {
+            theatreSelect.innerHTML = `<option value="">No theatres found in this city</option>`;
+            this.selectedTheatreId = null;
+        } else {
+            theatreSelect.innerHTML = theatres.map((t, idx) => `
+                <option value="${t.id}" ${idx === 0 ? 'selected' : ''}>${t.name} (${t.location})</option>
+            `).join("");
+            this.selectedTheatreId = theatreSelect.value;
+        }
 
         this.populateShowsDropdown();
     }
@@ -378,16 +430,16 @@ class CineWaveApp {
         const showSelect = document.getElementById("wizardShowSelect");
 
         if (shows.length === 0) {
-            showSelect.innerHTML = `<option value="">No shows available for this combination</option>`;
+            showSelect.innerHTML = `<option value="">No scheduled shows available for this venue</option>`;
             this.selectedShowId = null;
             this.renderShowAvailabilityAlert(null);
             return;
         }
 
-        showSelect.innerHTML = shows.map(s => {
+        showSelect.innerHTML = shows.map((s, idx) => {
             const avail = window.pegaEngine.checkShowAvailability(s.id);
             return `
-                <option value="${s.id}" ${s.id === this.selectedShowId ? 'selected' : ''}>
+                <option value="${s.id}" ${idx === 0 ? 'selected' : ''}>
                     ${s.date} • ${s.startTime} [${s.showType}] - ₹${s.ticketPrice} (${avail.availableSeatsCount || 0} seats left)
                 </option>
             `;
@@ -401,6 +453,14 @@ class CineWaveApp {
         this.selectedMovieId = document.getElementById("wizardMovieSelect").value;
         this.selectedSeats = [];
         this.populateShowsDropdown();
+        this.renderSeatMap();
+        this.updateCostCalculation();
+    }
+
+    onWizardLocationChanged() {
+        this.selectedLocation = document.getElementById("wizardLocationSelect").value;
+        this.selectedSeats = [];
+        this.populateTheatresDropdown();
         this.renderSeatMap();
         this.updateCostCalculation();
     }
@@ -433,7 +493,7 @@ class CineWaveApp {
         if (!showId) {
             container.innerHTML = `
                 <div style="background: rgba(230, 57, 70, 0.15); border: 1px solid var(--accent-red); padding: 0.75rem 1rem; border-radius: var(--radius-md); color: #ff8585; font-size: 0.9rem;">
-                    <i class="fa-solid fa-circle-exclamation"></i> No scheduled shows currently active for this venue. Please select another theatre or movie.
+                    <i class="fa-solid fa-circle-exclamation"></i> No scheduled shows currently active for this venue. Please select another theatre.
                 </div>
             `;
             return;
@@ -449,7 +509,7 @@ class CineWaveApp {
         } else if (avail.status === "Almost Full") {
             container.innerHTML = `
                 <div style="background: rgba(255, 183, 3, 0.15); border: 1px solid var(--border-gold); padding: 0.75rem 1.25rem; border-radius: var(--radius-md); color: var(--accent-gold); font-size: 0.9rem;">
-                    <i class="fa-solid fa-triangle-exclamation"></i> 🟡 Few Seats Left! (${avail.availableSeatsCount} / ${avail.totalSeats} seats available). Fast booking recommended.
+                    <i class="fa-solid fa-triangle-exclamation"></i> 🟡 Few Seats Left! (${avail.availableSeatsCount} / ${avail.totalSeats} seats open). Fast booking recommended.
                 </div>
             `;
         } else {
@@ -471,7 +531,6 @@ class CineWaveApp {
 
         let html = "";
         rows.forEach((rowLetter, rIdx) => {
-            // Tier header demarcations
             if (rowLetter === "A") {
                 html += `<div class="seat-tier-header">Regular Tier (Rows A–D)</div>`;
             } else if (rowLetter === "E") {
@@ -483,7 +542,7 @@ class CineWaveApp {
             html += `<div class="seat-row">`;
             html += `<div class="row-label">${rowLetter}</div>`;
             
-            // Left Group (Cols 1, 2, 3)
+            // Left Group
             html += `<div class="seat-group aisle-right">`;
             for (let c = 1; c <= 3; c++) {
                 const seatCode = `${rowLetter}${c}`;
@@ -503,7 +562,7 @@ class CineWaveApp {
             }
             html += `</div>`;
 
-            // Right Group (Cols 4, 5, 6)
+            // Right Group
             html += `<div class="seat-group">`;
             for (let c = 4; c <= 6; c++) {
                 const seatCode = `${rowLetter}${c}`;
@@ -541,7 +600,7 @@ class CineWaveApp {
             this.selectedSeats.splice(index, 1);
         } else {
             if (this.selectedSeats.length >= 8) {
-                this.showToast("Maximum 8 tickets allowed per booking session.", "warning");
+                this.showToast("Maximum 8 tickets allowed per booking.", "warning");
                 return;
             }
             this.selectedSeats.push(seatCode);
@@ -572,7 +631,6 @@ class CineWaveApp {
         document.getElementById("calcTaxAmount").textContent = tax.toLocaleString("en-IN");
         document.getElementById("calcTotalAmount").textContent = total.toLocaleString("en-IN");
 
-        // Lifecycle stage step 2 (Calculate Cost)
         if (this.selectedSeats.length > 0) {
             this.renderWizardStagesBar(2);
             document.getElementById("wizardCaseIdDisplay").textContent = `Stage 2: Cost Computed (₹${total.toLocaleString("en-IN")})`;
@@ -586,7 +644,7 @@ class CineWaveApp {
         const confirmed = document.getElementById("customerConfirmationCheck")?.checked;
 
         if (this.selectedSeats.length === 0) {
-            this.showToast("Rule US-001: Please select at least one cinema seat to proceed.", "warning");
+            this.showToast("Please select at least one seat to proceed.", "warning");
             return;
         }
 
@@ -595,9 +653,8 @@ class CineWaveApp {
             return;
         }
 
-        // Advance to Stage 4 (Confirmation) & Stage 5 (Processing)
-        this.renderWizardStagesBar(4);
-        document.getElementById("wizardCaseIdDisplay").textContent = "Stage 4: Customer Confirmed -> Processing...";
+        this.renderWizardStagesBar(5); // Payment & Processing
+        document.getElementById("wizardCaseIdDisplay").textContent = "Step 3: Payment Processed -> Confirmed!";
 
         try {
             const createdCase = window.pegaEngine.submitBookingCase({
@@ -610,7 +667,7 @@ class CineWaveApp {
                 seats: this.selectedSeats,
                 ticketCategory: this.selectedCategory,
                 customerConfirmed: true,
-                autoApprove: true // Instant booking completion for demo
+                autoApprove: true
             });
 
             this.showBookingSuccess(createdCase);
@@ -623,9 +680,10 @@ class CineWaveApp {
         document.getElementById("wizardStep1").style.display = "none";
         document.getElementById("wizardStep2Success").style.display = "block";
 
-        this.renderWizardStagesBar(7); // Case Completed
+        this.renderWizardStagesBar(7); // Completed
         document.getElementById("wizardCaseIdDisplay").textContent = `Pega Case ${caseItem.pyID} Resolved-Completed`;
 
+        document.getElementById("tktTamilTitle").textContent = caseItem.tamilTitle || caseItem.movieTitle;
         document.getElementById("tktMovieTitle").textContent = caseItem.movieTitle;
         document.getElementById("tktTheatreName").textContent = `${caseItem.theatreName} (${caseItem.location})`;
         document.getElementById("tktDate").textContent = caseItem.showDate;
@@ -636,7 +694,6 @@ class CineWaveApp {
         document.getElementById("tktTotalAmount").textContent = `₹${caseItem.totalAmount.toLocaleString("en-IN")}`;
         document.getElementById("tktTicketIdDisplay").textContent = `Ticket ID: ${caseItem.ticketId} • Assigned: ${caseItem.assignedWorkbasket}`;
 
-        // Generate QR Code
         const qrContainer = document.getElementById("ticketQrCanvas");
         qrContainer.innerHTML = "";
         new QRCode(qrContainer, {
@@ -676,7 +733,7 @@ class CineWaveApp {
                 <div style="grid-column: 1/-1; text-align: center; padding: 4rem; color: var(--text-muted);">
                     <i class="fa-solid fa-ticket-simple" style="font-size: 3rem; margin-bottom: 1rem;"></i>
                     <h3>No cinema bookings yet</h3>
-                    <p>Book tickets for the latest running movies to view them here.</p>
+                    <p>Book tickets for August 2026 or July 2026 Tamil blockbusters to view them here.</p>
                 </div>
             `;
             return;
@@ -696,6 +753,7 @@ class CineWaveApp {
                     <div class="history-card-top">
                         <img src="${movie ? movie.posterUrl : ''}" class="history-poster" alt="${c.movieTitle}">
                         <div class="history-info">
+                            <div style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 700;">${c.tamilTitle || ''}</div>
                             <h4>${c.movieTitle}</h4>
                             <div class="history-booking-id">ID: ${c.bookingId}</div>
                             <div style="font-size: 0.85rem; color: var(--accent-cyan);"><i class="fa-solid fa-masks-theater"></i> ${c.theatreName}</div>
@@ -724,16 +782,13 @@ class CineWaveApp {
     }
 
     cancelBooking(pyID) {
-        if (!confirm("Are you sure you want to cancel this booking? Held seats will be released immediately per Pega Rule 9.")) {
-            return;
-        }
-
+        if (!confirm("Are you sure you want to cancel this booking? Held seats will be released immediately.")) return;
         try {
             window.pegaEngine.cancelBookingByCustomer(pyID);
             this.renderMyBookings();
             this.renderNotifications();
             this.updateHeaderBadges();
-            this.showToast("Booking cancelled. Full refund initiated & seats released.", "info");
+            this.showToast("Booking cancelled. Refund initiated.", "info");
         } catch (err) {
             this.showToast(err.message, "error");
         }
@@ -747,14 +802,12 @@ class CineWaveApp {
     }
 
     // ==========================================
-    // PEGA PORTAL & STAFF WORKSPACE (US-005, US-006, US-009, US-010, Section 17)
+    // PEGA PORTAL & STAFF WORKSPACE
     // ==========================================
     renderPegaPortal() {
         this.renderKpis();
         this.renderWorkbasketTabs();
         this.renderPegaCasesTable();
-        this.renderAnalyticsCharts();
-        this.renderManagerMiniData();
     }
 
     renderKpis() {
@@ -809,73 +862,31 @@ class CineWaveApp {
         if (!tbody) return;
 
         if (cases.length === 0) {
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="9" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
-                        No cases currently assigned to this work queue.
-                    </td>
-                </tr>
-            `;
+            tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 2rem; color: var(--text-muted);">No cases assigned to this work queue.</td></tr>`;
             return;
         }
 
         tbody.innerHTML = cases.map(c => {
             let slaPill = `<span class="sla-badge within"><span class="sla-dot"></span> Within SLA</span>`;
             if (c.slaStatus === "Approaching Deadline") {
-                slaPill = `<span class="sla-badge approaching"><span class="sla-dot"></span> Approaching (10m+)</span>`;
-            } else if (c.slaStatus === "High Priority") {
-                slaPill = `<span class="sla-badge high"><span class="sla-dot"></span> High (20m+)</span>`;
+                slaPill = `<span class="sla-badge approaching"><span class="sla-dot"></span> Approaching</span>`;
             } else if (c.slaStatus === "SLA Breached") {
-                slaPill = `<span class="sla-badge breached"><span class="sla-dot"></span> Breached (30m+)</span>`;
+                slaPill = `<span class="sla-badge breached"><span class="sla-dot"></span> Breached</span>`;
             }
 
             return `
                 <tr>
-                    <td>
-                        <strong style="color: var(--accent-gold); font-family: monospace;">${c.pyID}</strong>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">${c.bookingId}</div>
-                    </td>
-                    <td>
-                        <strong>${c.customerName}</strong>
-                        <div style="font-size: 0.75rem; color: var(--text-secondary);">${c.mobile}</div>
-                    </td>
-                    <td>
-                        <strong style="color: #fff;">${c.movieTitle}</strong>
-                        <div style="font-size: 0.75rem; color: var(--accent-cyan);">${c.theatreName} (${c.screenName})</div>
-                    </td>
-                    <td>
-                        <span class="screen-badge" style="background: rgba(0, 180, 216, 0.1); color: var(--accent-cyan); font-size: 0.75rem;">${c.showType}</span>
-                        <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">${c.assignedWorkbasket}</div>
-                    </td>
-                    <td>
-                        <strong>${c.seats.join(", ")}</strong>
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">${c.ticketCount} tickets (${c.ticketCategory})</div>
-                    </td>
-                    <td>
-                        <strong style="color: var(--text-gold);">₹${c.totalAmount.toLocaleString("en-IN")}</strong>
-                    </td>
-                    <td>
-                        ${slaPill}
-                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 3px;">Urgency: <strong>${c.urgency}</strong>/100</div>
-                    </td>
-                    <td>
-                        <span style="font-weight: 600; color: ${c.pyStatusWork.includes('Completed') ? 'var(--accent-emerald)' : (c.pyStatusWork.includes('Rejected') ? 'var(--accent-red)' : 'var(--accent-gold)')};">
-                            ${c.pyStatusWork}
-                        </span>
-                    </td>
+                    <td><strong style="color: var(--accent-gold); font-family: monospace;">${c.pyID}</strong></td>
+                    <td><strong>${c.customerName}</strong><div style="font-size: 0.75rem; color: var(--text-secondary);">${c.mobile}</div></td>
+                    <td><strong style="color: #fff;">${c.tamilTitle || c.movieTitle}</strong><div style="font-size: 0.75rem; color: var(--accent-cyan);">${c.theatreName}</div></td>
+                    <td><span class="screen-badge" style="font-size: 0.75rem;">${c.showType}</span></td>
+                    <td><strong>${c.seats.join(", ")}</strong></td>
+                    <td><strong style="color: var(--text-gold);">₹${c.totalAmount.toLocaleString("en-IN")}</strong></td>
+                    <td>${slaPill}</td>
+                    <td><span style="font-weight: 600;">${c.pyStatusWork}</span></td>
                     <td>
                         <div class="action-btn-group">
-                            <button class="btn-action-sm inspect" onclick="app.inspectCase('${c.pyID}')" title="Inspect Pega Case">
-                                <i class="fa-solid fa-eye"></i>
-                            </button>
-                            ${c.pyStatusWork === 'Pending-Review' ? `
-                                <button class="btn-action-sm approve" onclick="app.staffAction('${c.pyID}', 'Approve')" title="Approve Booking (US-006)">
-                                    <i class="fa-solid fa-check"></i>
-                                </button>
-                                <button class="btn-action-sm reject" onclick="app.staffAction('${c.pyID}', 'Reject')" title="Reject Booking (US-006)">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </button>
-                            ` : ''}
+                            <button class="btn-action-sm inspect" onclick="app.showCaseTicketModal('${c.pyID}')"><i class="fa-solid fa-eye"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -883,289 +894,8 @@ class CineWaveApp {
         }).join("");
     }
 
-    staffAction(pyID, action) {
-        let reason = "";
-        if (action === "Reject") {
-            reason = prompt("Pega Rule US-006: Please enter mandatory Rejection Reason for this case:");
-            if (!reason) return;
-        }
-
-        try {
-            window.pegaEngine.processStaffAction(pyID, action, reason, "Kathirvel T");
-            this.renderPegaPortal();
-            this.renderNotifications();
-            this.updateHeaderBadges();
-            this.showToast(`Case ${pyID} ${action}d successfully.`, "success");
-        } catch (err) {
-            this.showToast(err.message, "error");
-        }
-    }
-
-    inspectCase(pyID) {
-        const c = window.pegaEngine.getCaseById(pyID);
-        if (!c) return;
-
-        document.getElementById("inspectCaseTitle").textContent = `Case ${c.pyID} — ${c.bookingId}`;
-        document.getElementById("inspectCaseSubtitle").textContent = `Pega Routing: ${c.assignedWorkbasket} | Status: ${c.pyStatusWork}`;
-
-        const body = document.getElementById("caseInspectorBody");
-        body.innerHTML = `
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
-                <div class="theatre-card" style="padding: 1.25rem;">
-                    <h4 style="color: var(--accent-gold); margin-bottom: 0.75rem;"><i class="fa-solid fa-user"></i> Customer Information</h4>
-                    <p><strong>Name:</strong> ${c.customerName}</p>
-                    <p><strong>Email:</strong> ${c.email}</p>
-                    <p><strong>Mobile:</strong> ${c.mobile}</p>
-                    <p><strong>Customer ID:</strong> ${c.customerId}</p>
-                </div>
-                <div class="theatre-card" style="padding: 1.25rem;">
-                    <h4 style="color: var(--accent-cyan); margin-bottom: 0.75rem;"><i class="fa-solid fa-film"></i> Show & Seating Details</h4>
-                    <p><strong>Movie:</strong> ${c.movieTitle}</p>
-                    <p><strong>Venue:</strong> ${c.theatreName} (${c.location})</p>
-                    <p><strong>Screen:</strong> ${c.screenName} [${c.showType}]</p>
-                    <p><strong>Show Time:</strong> ${c.showDate} @ ${c.showTime}</p>
-                    <p><strong>Seats:</strong> ${c.seats.join(", ")} (${c.ticketCategory})</p>
-                </div>
-            </div>
-
-            <div class="theatre-card" style="padding: 1.25rem; margin-bottom: 2rem;">
-                <h4 style="color: var(--accent-emerald); margin-bottom: 0.75rem;"><i class="fa-solid fa-calculator"></i> Cost & Pricing Breakdown (US-003)</h4>
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center;">
-                    <div style="background: var(--bg-surface); padding: 0.75rem; border-radius: var(--radius-sm);">
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">Base Subtotal</div>
-                        <strong style="font-size: 1.1rem;">₹${c.subtotal}</strong>
-                    </div>
-                    <div style="background: var(--bg-surface); padding: 0.75rem; border-radius: var(--radius-sm);">
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">Convenience Fee</div>
-                        <strong style="font-size: 1.1rem;">₹${c.convenienceFee}</strong>
-                    </div>
-                    <div style="background: var(--bg-surface); padding: 0.75rem; border-radius: var(--radius-sm);">
-                        <div style="font-size: 0.75rem; color: var(--text-muted);">18% GST</div>
-                        <strong style="font-size: 1.1rem;">₹${c.taxAmount}</strong>
-                    </div>
-                    <div style="background: rgba(255, 183, 3, 0.15); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-gold);">
-                        <div style="font-size: 0.75rem; color: var(--accent-gold);">Total Paid</div>
-                        <strong style="font-size: 1.2rem; color: var(--accent-gold);">₹${c.totalAmount}</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="theatre-card" style="padding: 1.25rem; margin-bottom: 2rem;">
-                <h4 style="color: #fff; margin-bottom: 0.75rem;"><i class="fa-solid fa-clock-rotate-left"></i> Pega Case Audit Trail & History Log</h4>
-                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                    ${(c.auditTrail || []).map(entry => `
-                        <div style="display: flex; gap: 1rem; font-size: 0.85rem; border-bottom: 1px solid var(--border-light); padding-bottom: 0.5rem;">
-                            <span style="color: var(--accent-gold); min-width: 90px; font-family: monospace;">${entry.time}</span>
-                            <div style="flex: 1;">
-                                <strong style="color: #fff;">${entry.actor}</strong>: ${entry.action}
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">Lifecycle Stage: ${entry.stage}</div>
-                            </div>
-                        </div>
-                    `).join("")}
-                </div>
-            </div>
-
-            <div class="modal-footer-actions">
-                ${c.pyStatusWork === 'Pending-Review' ? `
-                    <button class="btn-primary" onclick="app.staffAction('${c.pyID}', 'Approve'); app.closeCaseInspector();">
-                        <i class="fa-solid fa-check"></i> Approve Case
-                    </button>
-                    <button class="btn-secondary" style="border-color: var(--accent-red); color: var(--accent-red);" onclick="app.staffAction('${c.pyID}', 'Reject'); app.closeCaseInspector();">
-                        <i class="fa-solid fa-xmark"></i> Reject Case
-                    </button>
-                ` : ''}
-                <button class="btn-secondary" onclick="app.closeCaseInspector()">Close Inspector</button>
-            </div>
-        `;
-
-        document.getElementById("caseInspectorModal").classList.add("open");
-    }
-
-    closeCaseInspector() {
-        document.getElementById("caseInspectorModal").classList.remove("open");
-    }
-
-    renderAnalyticsCharts() {
-        const metrics = window.pegaEngine.getDashboardMetrics();
-
-        // Chart 1: Bookings by Movie
-        const ctxMovie = document.getElementById("chartMovieBookings");
-        if (ctxMovie) {
-            if (this.chartInstances.movie) this.chartInstances.movie.destroy();
-            const movieLabels = Object.keys(metrics.bookingsByMovie);
-            const movieData = Object.values(metrics.bookingsByMovie);
-
-            this.chartInstances.movie = new Chart(ctxMovie, {
-                type: "doughnut",
-                data: {
-                    labels: movieLabels.map(l => l.length > 18 ? l.substring(0, 18) + '...' : l),
-                    datasets: [{
-                        data: movieData,
-                        backgroundColor: ["#ffb703", "#fb8500", "#e63946", "#00b4d8", "#7209b7", "#06d6a0"]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: "right", labels: { color: "#94a3b8", font: { size: 11 } } }
-                    }
-                }
-            });
-        }
-
-        // Chart 2: Revenue by Theatre
-        const ctxTheatre = document.getElementById("chartTheatreRevenue");
-        if (ctxTheatre) {
-            if (this.chartInstances.theatre) this.chartInstances.theatre.destroy();
-            const theatreLabels = Object.keys(metrics.bookingsByTheatre);
-            const theatreData = Object.values(metrics.bookingsByTheatre).map(b => b * 550); // simulated revenue
-
-            this.chartInstances.theatre = new Chart(ctxTheatre, {
-                type: "bar",
-                data: {
-                    labels: theatreLabels.map(l => l.replace("CineWave ", "").replace("Cinemas – ", "")),
-                    datasets: [{
-                        label: "Revenue Generated (₹)",
-                        data: theatreData,
-                        backgroundColor: "#00b4d8",
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { ticks: { color: "#94a3b8", font: { size: 10 } } },
-                        y: { ticks: { color: "#94a3b8" } }
-                    }
-                }
-            });
-        }
-    }
-
-    renderManagerMiniData() {
-        const movies = window.pegaEngine.getMovies();
-        const moviesList = document.getElementById("managerMoviesListMini");
-        if (moviesList) {
-            moviesList.innerHTML = movies.map(m => `
-                <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface-elevated); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.85rem;">
-                    <div><strong>${m.title}</strong> (${m.language}) - ₹${m.startingPrice}</div>
-                    <button class="btn-action-sm reject" onclick="app.deleteMovieItem('${m.id}')" title="Delete Movie"><i class="fa-solid fa-trash"></i></button>
-                </div>
-            `).join("");
-        }
-
-        const shows = window.pegaEngine.getShows();
-        const showsList = document.getElementById("managerShowsListMini");
-        if (showsList) {
-            showsList.innerHTML = shows.map(s => {
-                const m = window.pegaEngine.getMovieById(s.movieId);
-                return `
-                    <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-surface-elevated); padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); font-size: 0.85rem;">
-                        <div>
-                            <strong>${m ? m.title : s.movieId}</strong> - ${s.startTime} [${s.showType}]
-                            <div style="font-size: 0.75rem; color: var(--accent-gold);">${s.status} (${(s.bookedSeats || []).length}/${s.totalSeats} booked)</div>
-                        </div>
-                        <div style="display: flex; gap: 0.25rem;">
-                            <button class="btn-action-sm inspect" onclick="app.toggleShowSoldOut('${s.id}')" title="Toggle Sold Out">Sold Out</button>
-                            <button class="btn-action-sm reject" onclick="app.deleteShowItem('${s.id}')" title="Delete Show"><i class="fa-solid fa-trash"></i></button>
-                        </div>
-                    </div>
-                `;
-            }).join("");
-        }
-    }
-
     // ==========================================
-    // DATA CRUD MODALS (US-005)
-    // ==========================================
-    openAddMovieModal() {
-        document.getElementById("addMovieModal").classList.add("open");
-    }
-
-    closeAddMovieModal() {
-        document.getElementById("addMovieModal").classList.remove("open");
-    }
-
-    handleSaveMovie(e) {
-        e.preventDefault();
-        const title = document.getElementById("newMovieTitle").value;
-        const lang = document.getElementById("newMovieLang").value;
-        const genre = document.getElementById("newMovieGenre").value;
-        const duration = document.getElementById("newMovieDuration").value;
-        const cert = document.getElementById("newMovieCert").value;
-        const price = document.getElementById("newMoviePrice").value;
-        const poster = document.getElementById("newMoviePoster").value;
-        const desc = document.getElementById("newMovieDesc").value;
-
-        window.pegaEngine.addMovie({
-            title, language: lang, genre, duration, certification: cert, startingPrice: price,
-            posterUrl: poster || undefined, description: desc
-        });
-
-        this.closeAddMovieModal();
-        this.renderAllViews();
-        this.showToast(`Movie "${title}" added to catalog (US-005).`, "success");
-    }
-
-    deleteMovieItem(id) {
-        if (!confirm("Are you sure you want to delete this movie record and its shows?")) return;
-        window.pegaEngine.deleteMovie(id);
-        this.renderAllViews();
-        this.showToast("Movie deleted.", "info");
-    }
-
-    openAddShowModal() {
-        const movies = window.pegaEngine.getMovies();
-        const theatres = window.pegaEngine.getTheatres();
-
-        document.getElementById("newShowMovieSelect").innerHTML = movies.map(m => `<option value="${m.id}">${m.title}</option>`).join("");
-        document.getElementById("newShowTheatreSelect").innerHTML = theatres.map(t => `<option value="${t.id}">${t.name} (${t.location})</option>`).join("");
-
-        document.getElementById("addShowModal").classList.add("open");
-    }
-
-    closeAddShowModal() {
-        document.getElementById("addShowModal").classList.remove("open");
-    }
-
-    handleSaveShow(e) {
-        e.preventDefault();
-        const movieId = document.getElementById("newShowMovieSelect").value;
-        const theatreId = document.getElementById("newShowTheatreSelect").value;
-        const date = document.getElementById("newShowDate").value;
-        const startTime = document.getElementById("newShowTime").value;
-        const showType = document.getElementById("newShowType").value;
-        const ticketPrice = document.getElementById("newShowPrice").value;
-
-        window.pegaEngine.addShow({
-            movieId, theatreId, date, startTime, showType, ticketPrice, totalSeats: 48
-        });
-
-        this.closeAddShowModal();
-        this.renderAllViews();
-        this.showToast("New Show scheduled and inventory provisioned (US-005).", "success");
-    }
-
-    deleteShowItem(id) {
-        window.pegaEngine.deleteShow(id);
-        this.renderAllViews();
-        this.showToast("Show deleted.", "info");
-    }
-
-    toggleShowSoldOut(id) {
-        const show = window.pegaEngine.getShowById(id);
-        if (!show) return;
-        const newStatus = show.status === "Sold Out" ? "Available" : "Sold Out";
-        window.pegaEngine.updateShow(id, { status: newStatus });
-        this.renderAllViews();
-        this.showToast(`Show status updated to: ${newStatus}`, "info");
-    }
-
-    // ==========================================
-    // NOTIFICATIONS & DRAWER (US-008)
+    // NOTIFICATIONS & DRAWER
     // ==========================================
     toggleNotificationDrawer() {
         const drawer = document.getElementById("notificationDrawer");
@@ -1180,7 +910,7 @@ class CineWaveApp {
         if (!container) return;
 
         if (notifs.length === 0) {
-            container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 2rem;">No new notifications</div>`;
+            container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 2rem;">No notifications</div>`;
             return;
         }
 
@@ -1207,9 +937,6 @@ class CineWaveApp {
         if (notifBadge) notifBadge.textContent = notifs.length;
     }
 
-    // ==========================================
-    // SLA TIMER ENGINE (US-009)
-    // ==========================================
     startSlaTimer() {
         setInterval(() => {
             window.pegaEngine.refreshAllCaseSLAs();
@@ -1220,9 +947,6 @@ class CineWaveApp {
         }, 5000);
     }
 
-    // ==========================================
-    // TOAST NOTIFICATIONS HELPER
-    // ==========================================
     showToast(message, type = "info") {
         const toast = document.createElement("div");
         toast.style.position = "fixed";
@@ -1255,13 +979,6 @@ class CineWaveApp {
             toast.style.transition = "opacity 0.4s ease";
             setTimeout(() => toast.remove(), 400);
         }, 3800);
-    }
-
-    resetSystemData() {
-        if (!confirm("Reset database back to original Pega seed state?")) return;
-        window.pegaEngine.resetToDefault();
-        this.renderAllViews();
-        this.showToast("CineWave database successfully restored to default.", "success");
     }
 }
 

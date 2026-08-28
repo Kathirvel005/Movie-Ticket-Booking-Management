@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineWave Entertainment | Movie Ticket Booking Management System - Pega Platform™</title>
-    <meta name="description" content="Production-grade Movie Ticket Booking Management application for CineWave Entertainment built with Pega Platform Case Management architecture. Designed and Developed by Kathirvel T.">
+    <title>CineWave | Tamil Movie Ticket Booking Management System - Pega Platform™</title>
+    <meta name="description" content="Production-grade Tamil Movie Ticket Booking platform featuring July 2026 & August 2026 Tamil blockbusters. Designed and Developed by Kathirvel T.">
     
     <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
     <!-- FontAwesome 6 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
-    <!-- Chart.js CDN for Staff Dashboard Analytics -->
+    <!-- Chart.js CDN for Analytics -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- QRCode.js CDN for Digital Movie Ticket QR Codes -->
@@ -38,7 +38,7 @@
                     <i class="fa-solid fa-film"></i>
                 </div>
                 <div class="logo-text-box">
-                    <h1>CineWave</h1>
+                    <h1>CineWave <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">தமிழ் சினிமா</span></h1>
                     <div class="logo-tagline">“Your Movie. Your Seat. Your Experience.”</div>
                 </div>
             </div>
@@ -46,11 +46,11 @@
             <nav>
                 <ul class="nav-links">
                     <li><button class="nav-item-btn active" data-nav="home" onclick="app.navigateView('home')"><i class="fa-solid fa-house"></i> Home</button></li>
-                    <li><button class="nav-item-btn" data-nav="movies" onclick="app.navigateView('movies')"><i class="fa-solid fa-clapperboard"></i> Movies</button></li>
+                    <li><button class="nav-item-btn" data-nav="august-movies" onclick="app.scrollToSection('sectionAug2026')"><i class="fa-solid fa-calendar-check"></i> August 2026</button></li>
+                    <li><button class="nav-item-btn" data-nav="july-movies" onclick="app.scrollToSection('sectionJul2026')"><i class="fa-solid fa-clock-rotate-left"></i> July 2026</button></li>
                     <li><button class="nav-item-btn" data-nav="theatres" onclick="app.navigateView('theatres')"><i class="fa-solid fa-masks-theater"></i> Theatres</button></li>
                     <li><button class="nav-item-btn" data-nav="my-bookings" onclick="app.navigateView('my-bookings')"><i class="fa-solid fa-ticket"></i> My Bookings</button></li>
-                    <li><button class="nav-item-btn" data-nav="pega-portal" onclick="app.navigateView('pega-portal')"><i class="fa-solid fa-diagram-project"></i> Pega Case Portal <span class="wb-count-badge" id="headerPendingBadge">2</span></button></li>
-                    <li><button class="nav-item-btn" data-nav="architecture" onclick="app.navigateView('architecture')"><i class="fa-solid fa-book-open"></i> Pega Rules & Model</button></li>
+                    <li><button class="nav-item-btn" data-nav="pega-portal" onclick="app.navigateView('pega-portal')"><i class="fa-solid fa-diagram-project"></i> Pega Portal <span class="wb-count-badge" id="headerPendingBadge">1</span></button></li>
                 </ul>
             </nav>
 
@@ -97,31 +97,33 @@
        MAIN APP VIEWS WRAPPER
        ========================================================================== -->
     <main id="appMainContent">
-        <!-- 1. HOME VIEW -->
+        <!-- 1. HOME / TAMIL MOVIES VIEW -->
         <div id="viewHome" class="app-view">
             <!-- HERO SECTION (Section 2) -->
             <section class="hero-section">
                 <div class="hero-banner-card" id="heroBannerCard">
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <div class="hero-tag"><i class="fa-solid fa-fire"></i> Trending #1 in Tamil Nadu</div>
+                        <div class="hero-tag"><i class="fa-solid fa-fire"></i> Trending #1 Tamil Blockbuster</div>
+                        <div style="font-size: 1.3rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 0.35rem;" id="heroTamilTitle">தி கிரேட்டஸ்ட் ஆஃப் ஆல் டைம்</div>
                         <h2 class="hero-title" id="heroMovieTitle">The Greatest of All Time (GOAT)</h2>
                         <div class="hero-meta">
                             <div class="hero-meta-item">
-                                <span class="rating-badge"><i class="fa-solid fa-star"></i> <span id="heroRating">8.4</span>/10</span>
-                                <span style="font-size: 0.8rem;">(142K+ Votes)</span>
+                                <span class="rating-badge"><i class="fa-solid fa-star"></i> <span id="heroRating">8.8</span>/10</span>
+                                <span style="font-size: 0.8rem;">(148K+ Votes)</span>
                             </div>
                             <div class="hero-meta-item cert-badge" id="heroCert">U/A</div>
                             <div class="hero-meta-item"><i class="fa-regular fa-clock"></i> <span id="heroDuration">3h 03m</span></div>
-                            <div class="hero-meta-item"><i class="fa-solid fa-globe"></i> <span id="heroLang">Tamil</span></div>
+                            <div class="hero-meta-item"><i class="fa-solid fa-globe"></i> <span id="heroLang">Tamil (தமிழ்)</span></div>
                             <div class="hero-meta-item"><i class="fa-solid fa-film"></i> <span id="heroGenre">Action / Sci-Fi / Thriller</span></div>
+                            <div class="hero-meta-item" style="color: var(--accent-cyan);"><i class="fa-regular fa-calendar"></i> Released: 28 Aug 2026</div>
                         </div>
                         <p class="hero-description" id="heroDescription">
-                            A former elite member of the Special Anti-Terrorist Squad (SATS) is summoned back into action when an old vendetta threatens the nation and his own estranged family.
+                            A former elite officer of the Special Anti-Terrorist Squad (SATS) must confront a catastrophic high-tech vendetta threatening the nation and his own estranged family.
                         </p>
                         <div class="hero-buttons">
                             <button class="btn-primary" onclick="app.openBookingWizard('MOV-001')">
-                                <i class="fa-solid fa-ticket"></i> Book Now
+                                <i class="fa-solid fa-ticket"></i> Book Tickets
                             </button>
                             <button class="btn-secondary" onclick="app.openMovieDetails('MOV-001')">
                                 <i class="fa-solid fa-circle-info"></i> View Details
@@ -131,89 +133,90 @@
                 </div>
             </section>
 
-            <!-- SEARCH & MULTI-FILTER TOOLBAR (Section 22) -->
+            <!-- SEARCH, MULTI-FILTER & SORTING TOOLBAR -->
             <section class="search-filter-section">
                 <div class="filter-glass-card">
                     <div class="search-input-wrapper">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" id="movieSearchInput" placeholder="Search movies by title, cast, director..." oninput="app.filterMovies()">
+                        <input type="text" id="movieSearchInput" placeholder="Search Tamil movies by title (தமிழ் / English), cast, director..." oninput="app.filterMovies()">
                     </div>
                     <div class="filter-group">
+                        <select class="filter-select" id="filterCategory" onchange="app.filterMovies()">
+                            <option value="">📅 All Tamil Releases</option>
+                            <option value="August 2026">Released This Month (Aug 2026)</option>
+                            <option value="July 2026">Released Last Month (Jul 2026)</option>
+                        </select>
                         <select class="filter-select" id="filterLocation" onchange="app.filterMovies()">
-                            <option value="">📍 All Locations</option>
+                            <option value="">📍 All Tamil Nadu Cities</option>
                             <option value="Chennai">Chennai</option>
                             <option value="Madurai">Madurai</option>
                             <option value="Coimbatore">Coimbatore</option>
                             <option value="Trichy">Trichy</option>
                             <option value="Karur">Karur</option>
-                            <option value="Bengaluru">Bengaluru</option>
-                            <option value="Hyderabad">Hyderabad</option>
-                        </select>
-                        <select class="filter-select" id="filterLanguage" onchange="app.filterMovies()">
-                            <option value="">🌐 All Languages</option>
-                            <option value="Tamil">Tamil</option>
-                            <option value="Telugu">Telugu</option>
-                            <option value="English">English</option>
+                            <option value="Salem">Salem</option>
                         </select>
                         <select class="filter-select" id="filterGenre" onchange="app.filterMovies()">
                             <option value="">🎭 All Genres</option>
                             <option value="Action">Action</option>
                             <option value="Drama">Drama</option>
-                            <option value="Sci-Fi">Sci-Fi</option>
-                            <option value="Thriller">Thriller</option>
+                            <option value="Crime">Crime</option>
+                            <option value="Romantic">Romance / Comedy</option>
                             <option value="Biographical">Biographical</option>
+                            <option value="Political">Political</option>
                         </select>
-                        <select class="filter-select" id="filterShowType" onchange="app.filterMovies()">
-                            <option value="">🎬 All Screen Formats</option>
-                            <option value="IMAX">IMAX Experience</option>
-                            <option value="VIP">VIP Gold Class</option>
-                            <option value="Recliner">Recliner Suite</option>
-                            <option value="Regular">Dolby Atmos Standard</option>
+                        <select class="filter-select" id="sortBySelect" onchange="app.filterMovies()">
+                            <option value="date-desc">⚡ Sort: Newest Release</option>
+                            <option value="rating-desc">⭐ Sort: Highest Rating</option>
+                            <option value="title-asc">🔤 Sort: Title (A-Z)</option>
                         </select>
                     </div>
                 </div>
             </section>
 
-            <!-- CURRENT MOVIES SECTION (Section 3) -->
-            <section class="main-content-section">
+            <!-- SECTION 1: RELEASED THIS MONTH – AUGUST 2026 -->
+            <section class="main-content-section" id="sectionAug2026">
                 <div class="section-header">
                     <div class="section-title-box">
-                        <h2>Now Showing</h2>
-                        <p>Catch the latest Indian & Global blockbusters playing across CineWave cinemas</p>
+                        <div class="hero-tag" style="margin-bottom: 0.5rem; background: rgba(255, 183, 3, 0.15);"><i class="fa-solid fa-sparkles"></i> New Releases</div>
+                        <h2>Released This Month – August 2026</h2>
+                        <p>Latest Tamil blockbusters premiered in August 2026 across CineWave cinemas</p>
                     </div>
                     <div class="live-counter-badge" style="color: var(--accent-gold); font-size: 0.9rem;">
-                        <i class="fa-solid fa-circle-dot fa-fade"></i> Live Seat Inventory Synchronized
+                        <i class="fa-solid fa-circle-dot fa-fade"></i> Live Shows Active
                     </div>
                 </div>
 
-                <div class="movies-grid" id="moviesGridContainer">
-                    <!-- Movie cards rendered dynamically via js/app.js -->
+                <div class="movies-grid" id="augustMoviesGrid">
+                    <!-- Rendered dynamically -->
                 </div>
             </section>
-        </div>
 
-        <!-- 2. MOVIES EXPLORER VIEW -->
-        <div id="viewMovies" class="app-view" style="display: none;">
-            <section class="main-content-section" style="padding-top: 2rem;">
+            <!-- SECTION 2: RELEASED LAST MONTH – JULY 2026 -->
+            <section class="main-content-section" id="sectionJul2026" style="margin-top: 4rem;">
                 <div class="section-header">
                     <div class="section-title-box">
-                        <h2>Browse All Movies</h2>
-                        <p>Explore current running movies, certifications, and direct booking</p>
+                        <div class="hero-tag" style="margin-bottom: 0.5rem; background: rgba(0, 180, 216, 0.15); color: var(--accent-cyan); border-color: rgba(0, 180, 216, 0.3);"><i class="fa-solid fa-clock-rotate-left"></i> Superhits</div>
+                        <h2>Released Last Month – July 2026</h2>
+                        <p>Massive Tamil hits running successfully into their continued theatrical run</p>
+                    </div>
+                    <div class="live-counter-badge" style="color: var(--accent-cyan); font-size: 0.9rem;">
+                        <i class="fa-solid fa-film"></i> High Occupancy
                     </div>
                 </div>
-                <div class="movies-grid" id="allMoviesGrid">
+
+                <div class="movies-grid" id="julyMoviesGrid">
                     <!-- Rendered dynamically -->
                 </div>
             </section>
         </div>
 
-        <!-- 3. THEATRES & LOCATIONS VIEW (Section 4) -->
+        <!-- 2. THEATRES & LOCATIONS VIEW (Section 4) -->
         <div id="viewTheatres" class="app-view" style="display: none;">
             <section class="main-content-section" style="padding-top: 2rem;">
                 <div class="section-header">
                     <div class="section-title-box">
-                        <h2>CineWave Cinema Venues</h2>
-                        <p>Premium cinema properties across Tamil Nadu and South India</p>
+                        <h2>Tamil Nadu Cinema Venues</h2>
+                        <p>Premium IMAX, Dolby Atmos 4K, and Recliner properties across Tamil Nadu</p>
                     </div>
                 </div>
                 <div class="theatres-grid" id="theatresGridContainer">
@@ -222,7 +225,7 @@
             </section>
         </div>
 
-        <!-- 4. CUSTOMER MY BOOKINGS VIEW (Section 18) -->
+        <!-- 3. CUSTOMER MY BOOKINGS VIEW (Section 18) -->
         <div id="viewMyBookings" class="app-view" style="display: none;">
             <section class="main-content-section" style="padding-top: 2rem;">
                 <div class="section-header">
@@ -240,10 +243,9 @@
             </section>
         </div>
 
-        <!-- 5. PEGA CASE MANAGEMENT & STAFF PORTAL (US-005, US-006, US-009, US-010, Section 15, 16, 17) -->
+        <!-- 4. PEGA CASE MANAGEMENT & STAFF PORTAL -->
         <div id="viewPegaPortal" class="app-view" style="display: none;">
             <div class="pega-portal-wrapper">
-                <!-- Portal Banner -->
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--border-light); padding-bottom: 1.25rem;">
                     <div>
                         <h2 style="font-size: 2.2rem; display: flex; align-items: center; gap: 0.75rem;">
@@ -251,17 +253,9 @@
                         </h2>
                         <p style="color: var(--text-secondary);">Enterprise Case Management, SLA Urgency Engine, Show-Type Routing & Inventory Controls</p>
                     </div>
-                    <div style="display: flex; gap: 0.75rem;">
-                        <button class="btn-secondary" onclick="app.openAddShowModal()" title="Add new show schedule">
-                            <i class="fa-solid fa-calendar-plus"></i> Create Show
-                        </button>
-                        <button class="btn-primary" onclick="app.openAddMovieModal()" title="Add movie data">
-                            <i class="fa-solid fa-film"></i> Add Movie
-                        </button>
-                    </div>
                 </div>
 
-                <!-- KPI METRIC CARDS (Section 17) -->
+                <!-- KPI METRIC CARDS -->
                 <div class="kpi-cards-grid">
                     <div class="kpi-card">
                         <div class="kpi-icon-box total"><i class="fa-solid fa-layer-group"></i></div>
@@ -287,7 +281,7 @@
                     <div class="kpi-card">
                         <div class="kpi-icon-box cancelled"><i class="fa-solid fa-ban"></i></div>
                         <div class="kpi-info-box">
-                            <h4>Cancelled/Rejected</h4>
+                            <h4>Cancelled</h4>
                             <div class="kpi-value" id="kpiCancelledBookings">20</div>
                         </div>
                     </div>
@@ -307,19 +301,10 @@
                     </div>
                 </div>
 
-                <!-- ROUTING WORKBASKETS TABS (US-010) -->
-                <div style="margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
-                    <h3 style="font-size: 1.25rem;">Workbaskets & Routing Queues (US-010)</h3>
-                    <div style="font-size: 0.85rem; color: var(--text-muted);">
-                        <i class="fa-solid fa-route"></i> Automated Pega Routing by Show Type
-                    </div>
-                </div>
+                <!-- WORKBASKETS TABS -->
+                <div class="workbasket-tabs" id="workbasketTabsContainer"></div>
 
-                <div class="workbasket-tabs" id="workbasketTabsContainer">
-                    <!-- Tabs rendered dynamically -->
-                </div>
-
-                <!-- PEGA CASES DATA TABLE (US-006 & US-009) -->
+                <!-- PEGA CASES TABLE -->
                 <div class="pega-table-card">
                     <div class="table-responsive">
                         <table class="pega-data-table">
@@ -328,173 +313,50 @@
                                     <th>Case pyID</th>
                                     <th>Customer</th>
                                     <th>Movie & Theatre</th>
-                                    <th>Format / Routing Team</th>
+                                    <th>Format / Routing</th>
                                     <th>Seats & Qty</th>
                                     <th>Total (₹)</th>
-                                    <th>SLA Urgency (US-009)</th>
-                                    <th>Work Status</th>
-                                    <th>Staff Actions (US-006)</th>
+                                    <th>SLA Urgency</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody id="pegaCasesTableBody">
-                                <!-- Rendered dynamically -->
-                            </tbody>
+                            <tbody id="pegaCasesTableBody"></tbody>
                         </table>
-                    </div>
-                </div>
-
-                <!-- ANALYTICS CHARTS (Section 17) -->
-                <div class="charts-grid">
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h4><i class="fa-solid fa-chart-pie" style="color: var(--accent-gold);"></i> Bookings by Movie</h4>
-                        </div>
-                        <div style="position: relative; height: 260px;">
-                            <canvas id="chartMovieBookings"></canvas>
-                        </div>
-                    </div>
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h4><i class="fa-solid fa-chart-column" style="color: var(--accent-cyan);"></i> Revenue by Theatre Property</h4>
-                        </div>
-                        <div style="position: relative; height: 260px;">
-                            <canvas id="chartTheatreRevenue"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DATA OBJECTS CRUD MANAGER (US-005) -->
-                <div class="section-header" style="margin-top: 2rem;">
-                    <div class="section-title-box">
-                        <h3>Pega Data Objects Inventory (US-005)</h3>
-                        <p>Maintain Movies, Theatres, Screens & Live Show Capacities</p>
-                    </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-                    <!-- Movie CRUD Card -->
-                    <div class="theatre-card">
-                        <div class="theatre-card-header">
-                            <h4>Movie Catalog (`Data-CineWave-Movie`)</h4>
-                            <button class="btn-action-sm inspect" onclick="app.openAddMovieModal()"><i class="fa-solid fa-plus"></i> Add</button>
-                        </div>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">Manage active movie titles, certifications, posters, and base ticket pricing.</p>
-                        <div id="managerMoviesListMini" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 220px; overflow-y: auto;">
-                            <!-- Mini list -->
-                        </div>
-                    </div>
-
-                    <!-- Shows CRUD Card -->
-                    <div class="theatre-card">
-                        <div class="theatre-card-header">
-                            <h4>Show Schedules (`Data-CineWave-Show`)</h4>
-                            <button class="btn-action-sm inspect" onclick="app.openAddShowModal()"><i class="fa-solid fa-plus"></i> Schedule</button>
-                        </div>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">Update show times, format tiers, ticket prices, and toggle Sold Out status.</p>
-                        <div id="managerShowsListMini" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 220px; overflow-y: auto;">
-                            <!-- Mini list -->
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- 6. PEGA ARCHITECTURE & RULES VIEWER (Evaluation Reference) -->
-        <div id="viewArchitecture" class="app-view" style="display: none;">
-            <section class="main-content-section" style="padding-top: 2rem;">
-                <div class="section-header">
-                    <div class="section-title-box">
-                        <h2>Pega Platform™ Architecture & Business Logic</h2>
-                        <p>Complete Case Lifecycle, Data Modeling, SLA Urgency Matrix & Decision Routing Rules</p>
-                    </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
-                    <div class="theatre-card">
-                        <h3 style="color: var(--accent-gold); margin-bottom: 1rem;"><i class="fa-solid fa-sitemap"></i> Case Lifecycle Stages (Section 5 & 25)</h3>
-                        <ol style="padding-left: 1.5rem; line-height: 2; font-size: 0.95rem; color: #cbd5e1;">
-                            <li><strong>Submit Booking Request</strong> (US-001: Customer form validation)</li>
-                            <li><strong>Check Show Availability</strong> (US-002: Real-time inventory check)</li>
-                            <li><strong>Calculate Booking Cost</strong> (US-003: Dynamic pricing & taxes)</li>
-                            <li><strong>Review Booking Details</strong> (US-006: Staff review & US-010 routing)</li>
-                            <li><strong>Customer Confirmation</strong> (US-004: Mandatory acknowledgment)</li>
-                            <li><strong>Process Ticket Booking</strong> (US-007: Seat locking & ticket ID)</li>
-                            <li><strong>Generate Ticket</strong> (Digital QR Ticket generation)</li>
-                            <li><strong>Notify Customer</strong> (US-008: SMS/Email simulation)</li>
-                        </ol>
-                    </div>
-
-                    <div class="theatre-card">
-                        <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;"><i class="fa-solid fa-code-fork"></i> Routing Decision Table (US-010)</h3>
-                        <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem;">
-                            <tr style="border-bottom: 1px solid var(--border-light); text-align: left; color: var(--text-gold);">
-                                <th style="padding: 0.5rem 0;">Show Format</th>
-                                <th>Assigned Workbasket</th>
-                                <th>Escalation SLA</th>
-                            </tr>
-                            <tr style="border-bottom: 1px solid var(--border-light);">
-                                <td style="padding: 0.5rem 0;"><code>IMAX</code></td>
-                                <td>Premium Cinema Team</td>
-                                <td>10m Goal / 30m Deadline</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid var(--border-light);">
-                                <td style="padding: 0.5rem 0;"><code>VIP</code></td>
-                                <td>VIP Booking Team</td>
-                                <td>10m Goal / 30m Deadline</td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid var(--border-light);">
-                                <td style="padding: 0.5rem 0;"><code>Recliner</code></td>
-                                <td>Premium Seating Team</td>
-                                <td>10m Goal / 30m Deadline</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 0.5rem 0;"><code>Regular</code></td>
-                                <td>Standard Booking Team</td>
-                                <td>10m Goal / 30m Deadline</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- SLA Urgency Table -->
-                <div class="theatre-card" style="margin-bottom: 3rem;">
-                    <h3 style="color: var(--accent-emerald); margin-bottom: 1rem;"><i class="fa-solid fa-stopwatch"></i> SLA Urgency Escalation Rules (US-009)</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
-                        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-emerald);">
-                            <h4>0–10 mins</h4>
-                            <p style="color: var(--accent-emerald); font-weight: 700;">🟢 Within SLA</p>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Urgency Score: 10 – 40</p>
-                        </div>
-                        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-gold);">
-                            <h4>10–20 mins</h4>
-                            <p style="color: var(--accent-gold); font-weight: 700;">🟡 Approaching Deadline</p>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Urgency Score: 41 – 70</p>
-                        </div>
-                        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-orange);">
-                            <h4>20–30 mins</h4>
-                            <p style="color: var(--accent-orange); font-weight: 700;">🟠 High Priority</p>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Urgency Score: 71 – 89</p>
-                        </div>
-                        <div style="background: var(--bg-surface-elevated); padding: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--accent-red);">
-                            <h4>30+ mins</h4>
-                            <p style="color: var(--accent-red); font-weight: 700;">🔴 SLA Breached</p>
-                            <p style="font-size: 0.85rem; color: var(--text-muted);">Urgency Score: 90 – 100 (Breached)</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
     </main>
 
     <!-- ==========================================================================
-       BOOKING WIZARD MODAL (US-001, US-002, US-003, US-004)
+       MOVIE DETAILS MODAL (View Details)
+       ========================================================================== -->
+    <div class="modal-overlay" id="movieDetailsModal">
+        <div class="modal-container" style="max-width: 780px;">
+            <div class="modal-header">
+                <div class="modal-title-box">
+                    <h3 id="detailModalTitle">Movie Title</h3>
+                    <p id="detailModalSubtitle">Tamil Cinema Blockbuster Details</p>
+                </div>
+                <button class="modal-close-btn" onclick="app.closeMovieDetails()">&times;</button>
+            </div>
+            <div class="modal-body" id="movieDetailsBody">
+                <!-- Injected dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       BOOKING WIZARD MODAL (9-Step Booking Flow)
+       Movie -> Location -> Theatre -> Date -> Show Time -> Seats -> Customer Details -> Payment -> Confirmation
        ========================================================================== -->
     <div class="modal-overlay" id="bookingWizardModal">
         <div class="modal-container">
             <div class="modal-header">
                 <div class="modal-title-box">
                     <h3 id="wizardMovieTitle">Book Movie Tickets</h3>
-                    <p id="wizardSubtitle">Pega Case Management Guided Booking Journey</p>
+                    <p id="wizardSubtitle">Tamil Cinema Guided Booking Journey</p>
                 </div>
                 <button class="modal-close-btn" onclick="app.closeBookingWizard()">&times;</button>
             </div>
@@ -506,75 +368,63 @@
                         <div class="lifecycle-title"><i class="fa-solid fa-diagram-project"></i> Pega Case Lifecycle Stage</div>
                         <div class="lifecycle-case-id" id="wizardCaseIdDisplay">New Case Initialization</div>
                     </div>
-                    <div class="lifecycle-stages-bar" id="wizardStagesBar">
-                        <!-- Stages rendered dynamically -->
-                    </div>
+                    <div class="lifecycle-stages-bar" id="wizardStagesBar"></div>
                 </div>
 
-                <!-- STEP 1: FORM SELECTION & CUSTOMER INFO (US-001) -->
+                <!-- STEP 1: MOVIE, LOCATION, THEATRE, DATE & SHOW TIME -->
                 <div id="wizardStep1">
-                    <h4 style="font-size: 1.15rem; margin-bottom: 1rem; color: var(--text-gold);"><i class="fa-solid fa-user-pen"></i> Step 1: Customer & Show Selection (US-001)</h4>
+                    <h4 style="font-size: 1.15rem; margin-bottom: 1rem; color: var(--text-gold);"><i class="fa-solid fa-location-dot"></i> Step 1: Movie, City & Theatre Selection</h4>
                     
                     <div class="booking-form-grid">
                         <div class="form-group">
-                            <label>Customer Full Name *</label>
-                            <input type="text" id="custNameInput" value="Kathirvel T" placeholder="Enter full name" required>
+                            <label>Selected Movie *</label>
+                            <select id="wizardMovieSelect" onchange="app.onWizardMovieChanged()"></select>
                         </div>
                         <div class="form-group">
-                            <label>Email Address *</label>
-                            <input type="email" id="custEmailInput" value="kathirvel.dev@cinewave.in" placeholder="name@example.com" required>
+                            <label>Select City / Location *</label>
+                            <select id="wizardLocationSelect" onchange="app.onWizardLocationChanged()">
+                                <option value="">📍 All Tamil Nadu Cities</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Madurai">Madurai</option>
+                                <option value="Coimbatore">Coimbatore</option>
+                                <option value="Trichy">Trichy</option>
+                                <option value="Karur">Karur</option>
+                                <option value="Salem">Salem</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Mobile Number *</label>
-                            <input type="tel" id="custMobileInput" value="+91 94432 98765" placeholder="+91 98765 43210" required>
+                            <label>Cinema Theatre Venue *</label>
+                            <select id="wizardTheatreSelect" onchange="app.onWizardTheatreChanged()"></select>
                         </div>
                     </div>
 
                     <div class="booking-form-grid">
                         <div class="form-group">
-                            <label>Select Movie *</label>
-                            <select id="wizardMovieSelect" onchange="app.onWizardMovieChanged()">
-                                <!-- Options populated dynamically -->
-                            </select>
+                            <label>Select Date & Show Time *</label>
+                            <select id="wizardShowSelect" onchange="app.onWizardShowChanged()"></select>
                         </div>
                         <div class="form-group">
-                            <label>Select Cinema Venue & City *</label>
-                            <select id="wizardTheatreSelect" onchange="app.onWizardTheatreChanged()">
-                                <!-- Options populated dynamically -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Select Date & Time Show *</label>
-                            <select id="wizardShowSelect" onchange="app.onWizardShowChanged()">
-                                <!-- Options populated dynamically -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Seating Category (US-003)</label>
+                            <label>Seating Tier / Class</label>
                             <select id="wizardCategorySelect" onchange="app.onWizardCategoryChanged()">
-                                <option value="Regular">Regular (Standard Dolby Base)</option>
+                                <option value="Regular">Regular (Standard Base)</option>
                                 <option value="Premium" selected>Premium Class (+25%)</option>
                                 <option value="Recliner">Plush Recliner (+40%)</option>
-                                <option value="VIP">VIP Gold Lounge (+50%)</option>
+                                <option value="VIP">VIP Gold Class (+50%)</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- SHOW AVAILABILITY BADGE (US-002) -->
-                    <div id="wizardShowAvailabilityAlert" style="margin-bottom: 1.5rem;">
-                        <!-- Availability status alert -->
-                    </div>
+                    <!-- SHOW AVAILABILITY BADGE -->
+                    <div id="wizardShowAvailabilityAlert" style="margin-bottom: 1.5rem;"></div>
 
-                    <!-- CINEMA CURVED SCREEN & SEAT SELECTION (Section 8) -->
+                    <!-- CINEMA CURVED SCREEN & SEAT SELECTION -->
                     <div class="screen-visual-wrapper">
                         <div class="cinema-curved-screen"></div>
-                        <div class="screen-label">ALL EYES THIS WAY — ALL DIGITAL LASER PROJECTION SCREEN</div>
+                        <div class="screen-label">ALL EYES THIS WAY — 4K LASER PROJECTION SCREEN</div>
                     </div>
 
                     <div class="seating-layout-container">
-                        <div class="seats-grid" id="cinemaSeatsGrid">
-                            <!-- Cinema seat buttons generated dynamically -->
-                        </div>
+                        <div class="seats-grid" id="cinemaSeatsGrid"></div>
                     </div>
 
                     <!-- SEAT LEGEND -->
@@ -586,7 +436,24 @@
                         <div class="legend-item"><div class="legend-seat-sample" style="border: 2px solid var(--accent-gold);"></div> Recliner Tier</div>
                     </div>
 
-                    <!-- DYNAMIC PRICE BREAKDOWN CARD (US-003) -->
+                    <!-- CUSTOMER DETAILS FORM -->
+                    <h4 style="font-size: 1.15rem; margin: 1.5rem 0 1rem; color: var(--text-gold);"><i class="fa-solid fa-user-pen"></i> Step 2: Customer Contact Details</h4>
+                    <div class="booking-form-grid">
+                        <div class="form-group">
+                            <label>Customer Full Name *</label>
+                            <input type="text" id="custNameInput" value="Kathirvel T" placeholder="Enter full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" id="custEmailInput" value="kathirvel.dev@cinewave.in" placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number (SMS Alert) *</label>
+                            <input type="tel" id="custMobileInput" value="+91 94432 98765" placeholder="+91 98765 43210" required>
+                        </div>
+                    </div>
+
+                    <!-- DYNAMIC PRICE BREAKDOWN CARD -->
                     <div class="price-breakdown-card" id="wizardPriceCard">
                         <h4 style="margin-bottom: 0.75rem; color: var(--text-gold); font-size: 1rem;"><i class="fa-solid fa-calculator"></i> Price Breakdown (Rule US-003)</h4>
                         <div class="price-row">
@@ -598,45 +465,72 @@
                             <span>₹<span id="calcConvenienceFee">0</span></span>
                         </div>
                         <div class="price-row">
-                            <span>Taxes (18% GST Cinema Applicable)</span>
+                            <span>Taxes (18% GST Applicable)</span>
                             <span>₹<span id="calcTaxAmount">0</span></span>
                         </div>
                         <div class="price-row total">
-                            <span>TOTAL AMOUNT</span>
+                            <span>TOTAL PAYABLE</span>
                             <span class="price-total-val">₹<span id="calcTotalAmount">0</span></span>
                         </div>
                     </div>
 
-                    <!-- CUSTOMER CONFIRMATION CHECKBOX (US-004) -->
+                    <!-- PAYMENT METHOD SELECTION -->
+                    <h4 style="font-size: 1.15rem; margin: 1.5rem 0 1rem; color: var(--text-gold);"><i class="fa-solid fa-credit-card"></i> Step 3: Payment Method</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                        <label style="background: var(--bg-surface-elevated); border: 1px solid var(--border-gold); padding: 1rem; border-radius: var(--radius-md); display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                            <input type="radio" name="payMethod" value="UPI" checked style="accent-color: var(--accent-gold);">
+                            <div>
+                                <strong>UPI / GPay / PhonePe</strong>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Instant zero-fee payment</div>
+                            </div>
+                        </label>
+                        <label style="background: var(--bg-surface-elevated); border: 1px solid var(--border-light); padding: 1rem; border-radius: var(--radius-md); display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                            <input type="radio" name="payMethod" value="Card" style="accent-color: var(--accent-gold);">
+                            <div>
+                                <strong>Credit / Debit Card</strong>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Visa, Mastercard, RuPay</div>
+                            </div>
+                        </label>
+                        <label style="background: var(--bg-surface-elevated); border: 1px solid var(--border-light); padding: 1rem; border-radius: var(--radius-md); display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                            <input type="radio" name="payMethod" value="NetBanking" style="accent-color: var(--accent-gold);">
+                            <div>
+                                <strong>Net Banking</strong>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">All major Indian banks</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- CUSTOMER CONFIRMATION CHECKBOX -->
                     <label class="confirmation-checkbox-wrap" for="customerConfirmationCheck">
                         <input type="checkbox" id="customerConfirmationCheck">
                         <div>
                             <strong>I confirm that the above booking details, seat selection, and show schedule are correct.</strong>
-                            <div style="font-size: 0.8rem; color: var(--text-muted);">Required per Pega Business Rule US-004 before case escalation.</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Mandatory per Pega Business Rule US-004 before case escalation.</div>
                         </div>
                     </label>
 
                     <div class="modal-footer-actions">
                         <button class="btn-secondary" onclick="app.closeBookingWizard()">Cancel</button>
                         <button class="btn-primary" id="btnProceedBooking" onclick="app.proceedToBookingConfirmation()">
-                            <i class="fa-solid fa-arrow-right"></i> Review & Submit Booking
+                            <i class="fa-solid fa-lock"></i> Pay & Confirm Booking
                         </button>
                     </div>
                 </div>
 
-                <!-- STEP 2: BOOKING SUCCESS & DIGITAL QR TICKET (US-008 & Section 19, 27) -->
+                <!-- STEP 2: BOOKING SUCCESS & DIGITAL QR TICKET -->
                 <div id="wizardStep2Success" style="display: none; text-align: center;">
-                    <div style="font-size: 3.5rem; margin-bottom: 0.5rem; animation: bounce 1s ease;">🎉</div>
+                    <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">🎉</div>
                     <h3 style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 0.25rem;">BOOKING CONFIRMED!</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Your movie tickets have been successfully booked & verified via Pega Case Management.</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Your Tamil cinema tickets have been confirmed & verified via Pega Case Management.</p>
 
-                    <!-- DIGITAL TICKET COMPONENT (Section 19) -->
+                    <!-- DIGITAL TICKET COMPONENT -->
                     <div class="digital-ticket-container" id="digitalTicketElement">
                         <div class="ticket-header-strip">
                             <div class="ticket-brand">CINEWAVE ENTERTAINMENT</div>
                             <div class="ticket-tagline">“Your Movie. Your Seat. Your Experience.”</div>
                         </div>
                         <div class="ticket-body">
+                            <div style="font-size: 0.9rem; color: var(--accent-gold); font-weight: 700;" id="tktTamilTitle">தி கிரேட்டஸ்ட் ஆஃப் ஆல் டைம்</div>
                             <div class="ticket-movie-title" id="tktMovieTitle">The Greatest of All Time (GOAT)</div>
                             <div class="ticket-theatre-name" id="tktTheatreName">CineWave Luxe Cinemas – Chennai</div>
 
@@ -681,7 +575,7 @@
 
                     <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
                         <button class="btn-primary" onclick="app.downloadTicketPdf()">
-                            <i class="fa-solid fa-download"></i> Save / Print Ticket
+                            <i class="fa-solid fa-download"></i> Download / Print Ticket
                         </button>
                         <button class="btn-secondary" onclick="app.viewInMyBookings()">
                             <i class="fa-solid fa-ticket"></i> View in My Bookings
@@ -696,153 +590,7 @@
     </div>
 
     <!-- ==========================================================================
-       CASE INSPECTOR & STAFF REVIEW MODAL (US-006 & US-009)
-       ========================================================================== -->
-    <div class="modal-overlay" id="caseInspectorModal">
-        <div class="modal-container" style="max-width: 820px;">
-            <div class="modal-header">
-                <div class="modal-title-box">
-                    <h3 id="inspectCaseTitle">Case Details: pyID</h3>
-                    <p id="inspectCaseSubtitle">Pega Case Management Audit & Review Engine (US-006)</p>
-                </div>
-                <button class="modal-close-btn" onclick="app.closeCaseInspector()">&times;</button>
-            </div>
-            <div class="modal-body" id="caseInspectorBody">
-                <!-- Populated dynamically -->
-            </div>
-        </div>
-    </div>
-
-    <!-- ==========================================================================
-       ADD MOVIE MODAL (US-005)
-       ========================================================================== -->
-    <div class="modal-overlay" id="addMovieModal">
-        <div class="modal-container" style="max-width: 640px;">
-            <div class="modal-header">
-                <div class="modal-title-box">
-                    <h3>Add New Movie to Catalog (US-005)</h3>
-                    <p>Cinema Manager Pega Data Object CRUD</p>
-                </div>
-                <button class="modal-close-btn" onclick="app.closeAddMovieModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="addMovieForm" onsubmit="app.handleSaveMovie(event)">
-                    <div class="booking-form-grid">
-                        <div class="form-group">
-                            <label>Movie Title *</label>
-                            <input type="text" id="newMovieTitle" required placeholder="e.g. Leo 2 / Thug Life">
-                        </div>
-                        <div class="form-group">
-                            <label>Language *</label>
-                            <select id="newMovieLang">
-                                <option value="Tamil">Tamil</option>
-                                <option value="Telugu">Telugu</option>
-                                <option value="English">English</option>
-                                <option value="Hindi">Hindi</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="booking-form-grid">
-                        <div class="form-group">
-                            <label>Genre *</label>
-                            <input type="text" id="newMovieGenre" required placeholder="e.g. Action / Thriller">
-                        </div>
-                        <div class="form-group">
-                            <label>Duration *</label>
-                            <input type="text" id="newMovieDuration" required placeholder="e.g. 2h 45m">
-                        </div>
-                    </div>
-                    <div class="booking-form-grid">
-                        <div class="form-group">
-                            <label>Certification</label>
-                            <select id="newMovieCert">
-                                <option value="U/A">U/A</option>
-                                <option value="U">U</option>
-                                <option value="A">A</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Starting Base Price (₹) *</label>
-                            <input type="number" id="newMoviePrice" value="160" required>
-                        </div>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 1.25rem;">
-                        <label>Poster Image URL</label>
-                        <input type="url" id="newMoviePoster" placeholder="https://images.unsplash.com/...">
-                    </div>
-                    <div class="form-group" style="margin-bottom: 1.5rem;">
-                        <label>Description / Synopsis</label>
-                        <textarea id="newMovieDesc" rows="3" class="form-group input" style="background: var(--bg-surface); border: 1px solid var(--border-light); border-radius: var(--radius-sm); color: #fff; padding: 0.75rem;"></textarea>
-                    </div>
-                    <div class="modal-footer-actions">
-                        <button type="button" class="btn-secondary" onclick="app.closeAddMovieModal()">Cancel</button>
-                        <button type="submit" class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Movie</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==========================================================================
-       CREATE SHOW MODAL (US-005)
-       ========================================================================== -->
-    <div class="modal-overlay" id="addShowModal">
-        <div class="modal-container" style="max-width: 640px;">
-            <div class="modal-header">
-                <div class="modal-title-box">
-                    <h3>Schedule New Movie Show (US-005)</h3>
-                    <p>Pega Show Data Object & Seat Inventory</p>
-                </div>
-                <button class="modal-close-btn" onclick="app.closeAddShowModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="addShowForm" onsubmit="app.handleSaveShow(event)">
-                    <div class="booking-form-grid">
-                        <div class="form-group">
-                            <label>Select Movie *</label>
-                            <select id="newShowMovieSelect" required></select>
-                        </div>
-                        <div class="form-group">
-                            <label>Select Theatre Property *</label>
-                            <select id="newShowTheatreSelect" required></select>
-                        </div>
-                    </div>
-                    <div class="booking-form-grid">
-                        <div class="form-group">
-                            <label>Show Date *</label>
-                            <input type="date" id="newShowDate" value="2026-08-28" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Start Time *</label>
-                            <input type="text" id="newShowTime" value="06:30 PM" placeholder="e.g. 06:30 PM" required>
-                        </div>
-                    </div>
-                    <div class="booking-form-grid">
-                        <div class="form-group">
-                            <label>Screen Format (US-010 Routing) *</label>
-                            <select id="newShowType">
-                                <option value="IMAX">IMAX Experience (Routes to Premium Team)</option>
-                                <option value="VIP">VIP Gold Lounge (Routes to VIP Team)</option>
-                                <option value="Recliner">Recliner Suite (Routes to Premium Seating)</option>
-                                <option value="Regular">Dolby Atmos Standard (Routes to Standard Team)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Ticket Base Price (₹) *</label>
-                            <input type="number" id="newShowPrice" value="250" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer-actions">
-                        <button type="button" class="btn-secondary" onclick="app.closeAddShowModal()">Cancel</button>
-                        <button type="submit" class="btn-primary"><i class="fa-solid fa-calendar-plus"></i> Schedule Show</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==========================================================================
-       NOTIFICATION SLIDEOUT DRAWER (US-008)
+       NOTIFICATION SLIDEOUT DRAWER
        ========================================================================== -->
     <div class="drawer-backdrop" id="drawerBackdrop" onclick="app.toggleNotificationDrawer()"></div>
     <aside class="notification-drawer" id="notificationDrawer">
@@ -853,9 +601,7 @@
             </div>
             <button class="modal-close-btn" onclick="app.toggleNotificationDrawer()">&times;</button>
         </div>
-        <div class="drawer-body" id="notificationDrawerBody">
-            <!-- Populated dynamically -->
-        </div>
+        <div class="drawer-body" id="notificationDrawerBody"></div>
     </aside>
 
     <!-- ==========================================================================
@@ -865,36 +611,36 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h3>CineWave Entertainment</h3>
-                <p>Enterprise Movie Ticket Booking Management Platform built on Pega Platform™ Case Management Principles.</p>
+                <p>Enterprise Tamil Movie Ticket Booking Management Platform built on Pega Platform™ Case Management Principles.</p>
                 <div class="dev-pill" style="display: inline-flex;">
                     ⭐ Architecture & Design by Kathirvel T
                 </div>
             </div>
             <div class="footer-col">
-                <h4>Pega Capabilities</h4>
+                <h4>August 2026 Releases</h4>
                 <ul>
-                    <li><a href="javascript:void(0)" onclick="app.navigateView('pega-portal')">Case Lifecycle (US-001 to 010)</a></li>
-                    <li><a href="javascript:void(0)" onclick="app.navigateView('pega-portal')">SLA Urgency Monitor</a></li>
-                    <li><a href="javascript:void(0)" onclick="app.navigateView('pega-portal')">Show-Type Routing</a></li>
-                    <li><a href="javascript:void(0)" onclick="app.navigateView('architecture')">Data Modeling & ERD</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-001')">The Greatest of All Time</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-002')">Jana Nayagan</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-003')">Idhayam Murali</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-004')">Vaazhai</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Cinema Venues</h4>
+                <h4>July 2026 Releases</h4>
                 <ul>
-                    <li><a href="javascript:void(0)" onclick="app.filterByLocation('Chennai')">Chennai - Express Avenue</a></li>
-                    <li><a href="javascript:void(0)" onclick="app.filterByLocation('Madurai')">Madurai - Bypass Road</a></li>
-                    <li><a href="javascript:void(0)" onclick="app.filterByLocation('Coimbatore')">Coimbatore - Brookefields</a></li>
-                    <li><a href="javascript:void(0)" onclick="app.filterByLocation('Trichy')">Trichy - Cantonment</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-006')">Vettaiyan</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-007')">Amaran</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-008')">Raayan</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-009')">Maharaja</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Quick Actions</h4>
+                <h4>Cinema Cities</h4>
                 <ul>
-                    <li><a href="javascript:void(0)" onclick="app.navigateView('my-bookings')">View My Tickets</a></li>
-                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-001')">Quick Book GOAT</a></li>
-                    <li><a href="javascript:void(0)" onclick="app.openBookingWizard('MOV-002')">Quick Book Vettaiyan</a></li>
-                    <li><a href="javascript:void(0)" onclick="app.resetSystemData()">Reset Demo Database</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.filterByLocation('Chennai')">Chennai</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.filterByLocation('Madurai')">Madurai</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.filterByLocation('Coimbatore')">Coimbatore</a></li>
+                    <li><a href="javascript:void(0)" onclick="app.filterByLocation('Trichy')">Trichy</a></li>
                 </ul>
             </div>
         </div>

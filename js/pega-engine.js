@@ -6,7 +6,7 @@
 
 class PegaCaseEngine {
     constructor() {
-        this.STORAGE_KEY = "CINEWAVE_PEGA_DB_V9";
+        this.STORAGE_KEY = "CINEWAVE_PEGA_DB_V10";
         this.currentUserRole = "Customer"; // Customer | Staff | Manager | Admin
         this.currentActor = "Kathirvel T";
         this.initDatabase();
@@ -158,41 +158,45 @@ class PegaCaseEngine {
     }
 
     // ==========================================
-    // US-003: CALCULATE BOOKING COST
+    // US-003: CALCULATE BOOKING COST (DYNAMIC FORMULA)
+    // Formula: (Qty * Base * Multiplier) + (Qty * ₹40) + 18% GST
     // ==========================================
-    calculateBookingCost(showId, ticketCategory = "Regular", ticketCount = 1) {
+    calculateBookingCost(showId, category = "Regular", seatCount = 1) {
         const show = this.getShowById(showId);
         const basePrice = show ? show.ticketPrice : 150;
 
-        // Category Multiplier matrix
-        const categoryMultipliers = {
-            "Regular": 1.0,
-            "Premium": 1.25,
-            "Recliner": 1.4,
-            "VIP": 1.5
-        };
+        let multiplier = 1.0;
+        switch ((category || "Regular").toLowerCase()) {
+            case "premium":
+                multiplier = 1.25;
+                break;
+            case "recliner":
+                multiplier = 1.40;
+                break;
+            case "vip":
+                multiplier = 1.50;
+                break;
+            case "regular":
+            default:
+                multiplier = 1.0;
+                break;
+        }
 
-        const multiplier = categoryMultipliers[ticketCategory] || 1.0;
+        const qty = Math.max(1, parseInt(seatCount) || 1);
         const perSeatPrice = Math.round(basePrice * multiplier);
-        const ticketCost = ticketCount * perSeatPrice;
-        const convenienceFeePerTicket = 40; // ₹40 per ticket
-        const convenienceFee = ticketCount * convenienceFeePerTicket;
-        const subtotal = ticketCost;
-        const taxRate = 0.18; // 18% GST standard cinema tax
-        const taxAmount = Number(((subtotal + convenienceFee) * taxRate).toFixed(2));
-        const totalAmount = Number((subtotal + convenienceFee + taxAmount).toFixed(2));
+        const subtotal = perSeatPrice * qty;
+        const convenienceFee = qty * 40; // ₹40 per ticket
+        const taxableAmount = subtotal + convenienceFee;
+        const taxAmount = Number((taxableAmount * 0.18).toFixed(2)); // 18% GST
+        const totalAmount = Number((taxableAmount + taxAmount).toFixed(2));
 
         return {
             basePrice,
             categoryMultiplier: multiplier,
             perSeatPrice,
-            ticketCount,
-            ticketCategory,
-            ticketCost,
+            quantity: qty,
             subtotal,
             convenienceFee,
-            convenienceFeePerTicket,
-            taxRate: "18% GST",
             taxAmount,
             totalAmount
         };
@@ -312,6 +316,7 @@ class PegaCaseEngine {
             mobile: mobile.trim(),
             movieId: movie.id,
             movieTitle: movie.title,
+            tamilTitle: movie.tamilTitle || movie.title,
             moviePoster: movie.posterUrl,
             theatreId: theatre.id,
             theatreName: theatre.name,

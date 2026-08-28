@@ -6,7 +6,7 @@
 
 class PegaCaseEngine {
     constructor() {
-        this.STORAGE_KEY = "CINEWAVE_PEGA_DB_V10";
+        this.STORAGE_KEY = "CINEWAVE_PEGA_DB_V11";
         this.currentUserRole = "Customer"; // Customer | Staff | Manager | Admin
         this.currentActor = "Kathirvel T";
         this.initDatabase();

@@ -166,6 +166,26 @@ const CineWaveInitialData = {
             backdropUrl: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80",
             trailerUrl: "https://www.youtube.com",
             featured: false
+        },
+        {
+            id: "MOV-009",
+            title: "Jana Nayagan (Thalapathy 69)",
+            language: "Tamil",
+            genre: "Political / Action / Drama",
+            duration: "2h 50m",
+            certification: "U/A",
+            rating: 9.4,
+            votes: "182.6K",
+            releaseDate: "Oct 2025",
+            startingPrice: 190,
+            status: "Now Showing",
+            director: "H. Vinoth",
+            cast: "Thalapathy Vijay, Pooja Hegde, Bobby Deol, Gautham Vasudev Menon, Priyamani, Prakash Raj",
+            description: "A charismatic people's leader rises against systemic injustice and corporate political collusion. An Anirudh musical spectacle produced by KVN Productions.",
+            posterUrl: "assets/jana_nayagan_poster.png",
+            backdropUrl: "assets/jana_nayagan_poster.png",
+            trailerUrl: "https://www.youtube.com",
+            featured: true
         }
     ],
 
@@ -387,6 +407,48 @@ const CineWaveInitialData = {
             ticketPrice: 320,
             totalSeats: 48,
             bookedSeats: ["A1", "A2", "A3", "B4", "B5", "C2", "C3", "D1", "D2"],
+            status: "Available"
+        },
+        {
+            id: "SHW-111",
+            movieId: "MOV-009",
+            theatreId: "THT-001",
+            screenId: "SCR-001",
+            date: "2026-08-28",
+            startTime: "11:00 AM",
+            endTime: "01:50 PM",
+            showType: "IMAX",
+            ticketPrice: 300,
+            totalSeats: 48,
+            bookedSeats: ["A1", "A2", "B1", "B2", "C3", "C4", "E5", "E6"],
+            status: "Available"
+        },
+        {
+            id: "SHW-112",
+            movieId: "MOV-009",
+            theatreId: "THT-002",
+            screenId: "SCR-006",
+            date: "2026-08-28",
+            startTime: "06:45 PM",
+            endTime: "09:35 PM",
+            showType: "IMAX",
+            ticketPrice: 280,
+            totalSeats: 48,
+            bookedSeats: ["A1", "A2", "D1", "D2", "E1", "E2"],
+            status: "Available"
+        },
+        {
+            id: "SHW-113",
+            movieId: "MOV-009",
+            theatreId: "THT-003",
+            screenId: "SCR-007",
+            date: "2026-08-28",
+            startTime: "09:30 PM",
+            endTime: "12:20 AM",
+            showType: "VIP",
+            ticketPrice: 350,
+            totalSeats: 48,
+            bookedSeats: ["A3", "A4", "B5", "B6"],
             status: "Available"
         }
     ],

@@ -4,7 +4,7 @@
 > **Designed & Developed by:** **Kathirvel T**  
 > **Tagline:** *“Your Movie. Your Seat. Your Experience.”*
 
-![CineWave Homepage](assets/screenshot.png)
+![CineWave Homepage](assets/digital_qr_ticket.png)
 
 ---
 

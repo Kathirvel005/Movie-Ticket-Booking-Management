@@ -1,0 +1,12 @@
+{
+  "name": "cinewave-entertainment-movie-ticket-booking",
+  "version": "1.0.0",
+  "description": "Enterprise Movie Ticket Booking Management Platform built with Pega Platform™ Case Management Architecture. Designed and Developed by Kathirvel T.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "author": "Kathirvel T",
+  "license": "MIT"
+}

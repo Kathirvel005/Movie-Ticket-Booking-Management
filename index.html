@@ -59,6 +59,11 @@
                     <span class="sparkle">✨</span> Made by Kathirvel T
                 </div>
 
+                <!-- User Session Pill -->
+                <div class="user-session-wrapper" id="userSessionContainer">
+                    <!-- Loaded dynamically via app.js -->
+                </div>
+
                 <!-- Notification Bell -->
                 <button class="notif-bell-btn" id="notifBellBtn" onclick="app.toggleNotificationDrawer()" title="View Notifications">
                     <i class="fa-regular fa-bell"></i>
@@ -648,6 +653,73 @@
             <div class="footer-signature">Designed & Developed by Kathirvel T | CineWave Pega Platform™ v26.1</div>
         </div>
     </footer>
+
+    <!-- ==========================================================================
+       USER AUTHENTICATION MODAL (Login / Sign Up)
+       ========================================================================== -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-container" style="max-width: 420px; z-index: 10000;">
+            <div class="modal-header">
+                <div class="modal-title-box">
+                    <h3 id="authModalTitle">Sign In to CineWave</h3>
+                    <p id="authModalSubtitle">Access your bookings & digital tickets</p>
+                </div>
+                <button class="modal-close-btn" onclick="app.closeAuthModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Toggle Form Selector -->
+                <div style="display: flex; gap: 0.5rem; background: var(--bg-surface-elevated); padding: 0.25rem; border-radius: var(--radius-md); margin-bottom: 1.5rem;">
+                    <button class="btn-primary" id="btnSwitchLogin" onclick="app.switchAuthTab('login')" style="flex: 1; padding: 0.5rem; font-size: 0.85rem;">Login</button>
+                    <button class="btn-secondary" id="btnSwitchRegister" onclick="app.switchAuthTab('register')" style="flex: 1; padding: 0.5rem; font-size: 0.85rem; border: none; background: transparent;">New User?</button>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <form id="loginForm" onsubmit="app.handleLoginSubmit(event)">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label>Username</label>
+                        <input type="text" id="loginUsername" placeholder="e.g. kathirvel" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.75rem; border-radius: var(--radius-sm);">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Password</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.75rem; border-radius: var(--radius-sm);">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem;">
+                        <i class="fa-solid fa-right-to-bracket"></i> Sign In
+                    </button>
+                    <div style="text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted);">
+                        Demo Accounts: <strong>kathirvel</strong> or <strong>kavitha</strong> / Password: <strong>password123</strong>
+                    </div>
+                </form>
+
+                <!-- REGISTER FORM -->
+                <form id="registerForm" onsubmit="app.handleRegisterSubmit(event)" style="display: none;">
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label>Desired Username *</label>
+                        <input type="text" id="regUsername" placeholder="Min 3 chars" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.6rem; border-radius: var(--radius-sm);">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label>Password *</label>
+                        <input type="password" id="regPassword" placeholder="Min 4 chars" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.6rem; border-radius: var(--radius-sm);">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label>Full Name *</label>
+                        <input type="text" id="regName" placeholder="Your full name" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.6rem; border-radius: var(--radius-sm);">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0.75rem;">
+                        <label>Email Address *</label>
+                        <input type="email" id="regEmail" placeholder="name@example.com" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.6rem; border-radius: var(--radius-sm);">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1.25rem;">
+                        <label>Mobile Number (for SMS tickets) *</label>
+                        <input type="tel" id="regMobile" placeholder="+91 98765 43210" required style="width: 100%; box-sizing: border-box; background: var(--bg-surface); border: 1px solid var(--border-light); color: #fff; padding: 0.6rem; border-radius: var(--radius-sm);">
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 0.75rem;">
+                        <i class="fa-solid fa-user-plus"></i> Create Account
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="js/data.js"></script>

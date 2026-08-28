@@ -6,7 +6,7 @@
 
 class PegaCaseEngine {
     constructor() {
-        this.STORAGE_KEY = "CINEWAVE_PEGA_DB_V12";
+        this.STORAGE_KEY = "CINEWAVE_PEGA_DB_V13";
         this.currentUserRole = "Customer"; // Customer | Staff | Manager | Admin
         this.currentActor = "Kathirvel T";
         this.initDatabase();
@@ -96,6 +96,87 @@ class PegaCaseEngine {
 
     getNotifications() {
         return this.db.notifications || [];
+    }
+
+    // ==========================================
+    // USER AUTHENTICATION & REGISTRATION
+    // ==========================================
+    getUsers() {
+        return this.db.users || [];
+    }
+
+    registerUser(username, password, name, email, mobile) {
+        // Validations
+        if (!username || username.trim().length < 3) {
+            throw new Error("Username must be at least 3 characters long.");
+        }
+        if (!password || password.trim().length < 4) {
+            throw new Error("Password must be at least 4 characters long.");
+        }
+        if (!name || name.trim().length < 2) {
+            throw new Error("Full name is required.");
+        }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            throw new Error("Please enter a valid email address.");
+        }
+        if (!mobile || !/^[0-9+\s-]{8,15}$/.test(mobile)) {
+            throw new Error("Please enter a valid mobile number.");
+        }
+
+        const normalizedUsername = username.toLowerCase().trim();
+        const users = this.getUsers();
+
+        if (users.find(u => u.username === normalizedUsername)) {
+            throw new Error("Username is already taken. Please choose another.");
+        }
+
+        const newUser = {
+            username: normalizedUsername,
+            password: password.trim(),
+            name: name.trim(),
+            email: email.trim(),
+            mobile: mobile.trim()
+        };
+
+        this.db.users.push(newUser);
+        this.saveDatabase();
+        return newUser;
+    }
+
+    loginUser(username, password) {
+        if (!username || !password) {
+            throw new Error("Username and password are required.");
+        }
+
+        const normalizedUsername = username.toLowerCase().trim();
+        const user = this.getUsers().find(u => u.username === normalizedUsername);
+
+        if (!user || user.password !== password.trim()) {
+            throw new Error("Invalid username or password.");
+        }
+
+        this.setLoggedInUser(user);
+        return user;
+    }
+
+    getLoggedInUser() {
+        const stored = localStorage.getItem("CINEWAVE_LOGGED_IN_USER");
+        if (stored) {
+            try {
+                return JSON.parse(stored);
+            } catch (e) {
+                console.error("Failed to parse logged in user session", e);
+            }
+        }
+        return null;
+    }
+
+    setLoggedInUser(user) {
+        localStorage.setItem("CINEWAVE_LOGGED_IN_USER", JSON.stringify(user));
+    }
+
+    logoutUser() {
+        localStorage.removeItem("CINEWAVE_LOGGED_IN_USER");
     }
 
     // ==========================================

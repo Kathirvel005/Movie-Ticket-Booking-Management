@@ -764,5 +764,23 @@ const CineWaveInitialData = {
             message: "CineWave: Your booking CW20260828002 for Vettaiyan (IMAX Grand) at Madurai is confirmed! Seats: E1, E2, E3. Ticket: TKT-82941.",
             read: false
         }
+    ],
+
+    // Registered normal users for login & sign-up simulation
+    users: [
+        {
+            username: "kathirvel",
+            password: "password123",
+            name: "Kathirvel T",
+            email: "kathirvel.dev@cinewave.in",
+            mobile: "+91 94432 98765"
+        },
+        {
+            username: "kavitha",
+            password: "password123",
+            name: "Kavitha Raman",
+            email: "kavitha.r@gmail.com",
+            mobile: "+91 98401 23456"
+        }
     ]
 };

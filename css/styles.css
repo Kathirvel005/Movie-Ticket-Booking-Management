@@ -1962,3 +1962,24 @@ button, input, select, textarea {
     .footer-container { grid-template-columns: 1fr; }
     .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
 }
+
+/* User Session Pill & Auth forms */
+.user-session-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile-pill {
+    transition: all 0.3s ease;
+}
+
+.user-profile-pill:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+#authModal form input:focus {
+    outline: none;
+    border-color: var(--accent-gold) !important;
+    box-shadow: 0 0 8px rgba(255, 183, 3, 0.25);
+}
+

@@ -76,6 +76,7 @@ class CineWaveApp {
     }
 
     renderAllViews() {
+        this.renderUserSessionPill();
         this.renderHero();
         this.renderTamilMovieSections();
         this.renderTheatresGrid();
@@ -343,6 +344,13 @@ class CineWaveApp {
     // Movie -> Location -> Theatre -> Date -> Show Time -> Seats -> Customer Details -> Payment -> Confirmation
     // ==========================================
     openBookingWizard(movieId = "MOV-001") {
+        const loggedInUser = window.pegaEngine.getLoggedInUser();
+        if (!loggedInUser) {
+            this.showToast("Please login or create an account to book tickets.", "warning");
+            this.openAuthModal();
+            return;
+        }
+
         this.selectedMovieId = movieId;
         this.selectedSeats = [];
         const movie = window.pegaEngine.getMovieById(movieId);
@@ -354,6 +362,11 @@ class CineWaveApp {
         document.getElementById("wizardMovieTitle").textContent = `Book Tickets: ${movie ? (movie.tamilTitle + ' (' + movie.englishTitle + ')') : 'Tamil Movie'}`;
         document.getElementById("wizardSubtitle").textContent = `${movie ? movie.genre : ''} • Pega Case Management Workflow`;
         document.getElementById("wizardCaseIdDisplay").textContent = "Step 1: Selection & Availability";
+
+        // Fill user profile inputs
+        document.getElementById("custNameInput").value = loggedInUser.name;
+        document.getElementById("custEmailInput").value = loggedInUser.email;
+        document.getElementById("custMobileInput").value = loggedInUser.mobile;
 
         this.renderWizardStagesBar(0);
         this.populateWizardDropdowns();
@@ -979,6 +992,131 @@ class CineWaveApp {
             toast.style.transition = "opacity 0.4s ease";
             setTimeout(() => toast.remove(), 400);
         }, 3800);
+    }
+
+    // ==========================================
+    // USER AUTHENTICATION & LOGIN
+    // ==========================================
+    renderUserSessionPill() {
+        const container = document.getElementById("userSessionContainer");
+        if (!container) return;
+
+        const user = window.pegaEngine.getLoggedInUser();
+        if (user) {
+            container.innerHTML = `
+                <div class="user-profile-pill" style="display: flex; align-items: center; background: rgba(255,255,255,0.05); padding: 0.25rem 0.75rem; border-radius: var(--radius-full); border: 1px solid var(--border-light);">
+                    <div class="role-avatar" style="background: var(--accent-gold); color: #000; font-weight: 700; width: 26px; height: 26px; line-height: 26px; font-size: 0.8rem; margin-right: 0.5rem; display: inline-block; border-radius: 50%; text-align: center;">
+                        ${user.name.charAt(0)}
+                    </div>
+                    <div style="display: flex; flex-direction: column; text-align: left; margin-right: 0.5rem;">
+                        <span style="font-weight: 600; font-size: 0.8rem; color: #fff;">${user.name}</span>
+                        <a href="javascript:void(0)" onclick="app.handleLogout()" style="font-size: 0.7rem; color: var(--accent-gold); text-decoration: none; font-weight: 600;">Sign Out</a>
+                    </div>
+                </div>
+            `;
+        } else {
+            container.innerHTML = `
+                <button class="btn-secondary" onclick="app.openAuthModal()" style="padding: 0.45rem 1rem; font-size: 0.8rem; border-radius: var(--radius-full); display: flex; align-items: center; gap: 0.5rem; border: 1px solid var(--border-light); background: rgba(255,255,255,0.05); color: #fff;">
+                    <i class="fa-solid fa-right-to-bracket"></i> Login / Sign Up
+                </button>
+            `;
+        }
+    }
+
+    openAuthModal() {
+        document.getElementById("authModal").classList.add("open");
+        this.switchAuthTab("login");
+    }
+
+    closeAuthModal() {
+        document.getElementById("authModal").classList.remove("open");
+    }
+
+    switchAuthTab(tab) {
+        const loginForm = document.getElementById("loginForm");
+        const registerForm = document.getElementById("registerForm");
+        const btnLogin = document.getElementById("btnSwitchLogin");
+        const btnRegister = document.getElementById("btnSwitchRegister");
+        const modalTitle = document.getElementById("authModalTitle");
+        const modalSubtitle = document.getElementById("authModalSubtitle");
+
+        if (tab === "login") {
+            loginForm.style.display = "block";
+            registerForm.style.display = "none";
+            btnLogin.classList.add("btn-primary");
+            btnLogin.classList.remove("btn-secondary");
+            btnLogin.style.background = "";
+            btnLogin.style.border = "";
+            btnRegister.classList.add("btn-secondary");
+            btnRegister.classList.remove("btn-primary");
+            btnRegister.style.background = "transparent";
+            btnRegister.style.border = "none";
+            modalTitle.textContent = "Sign In to CineWave";
+            modalSubtitle.textContent = "Access your bookings & digital tickets";
+        } else {
+            loginForm.style.display = "none";
+            registerForm.style.display = "block";
+            btnRegister.classList.add("btn-primary");
+            btnRegister.classList.remove("btn-secondary");
+            btnRegister.style.background = "";
+            btnRegister.style.border = "";
+            btnLogin.classList.add("btn-secondary");
+            btnLogin.classList.remove("btn-primary");
+            btnLogin.style.background = "transparent";
+            btnLogin.style.border = "none";
+            modalTitle.textContent = "Create Account";
+            modalSubtitle.textContent = "Sign up to start booking cinema tickets";
+        }
+    }
+
+    handleLoginSubmit(e) {
+        e.preventDefault();
+        const usernameInput = document.getElementById("loginUsername").value;
+        const passwordInput = document.getElementById("loginPassword").value;
+
+        try {
+            const user = window.pegaEngine.loginUser(usernameInput, passwordInput);
+            this.showToast(`Welcome back, ${user.name}!`, "success");
+            this.closeAuthModal();
+            this.renderUserSessionPill();
+            
+            if (this.currentView === "my-bookings") {
+                this.renderMyBookings();
+            }
+        } catch (err) {
+            this.showToast(err.message, "error");
+        }
+    }
+
+    handleRegisterSubmit(e) {
+        e.preventDefault();
+        const usernameInput = document.getElementById("regUsername").value;
+        const passwordInput = document.getElementById("regPassword").value;
+        const nameInput = document.getElementById("regName").value;
+        const emailInput = document.getElementById("regEmail").value;
+        const mobileInput = document.getElementById("regMobile").value;
+
+        try {
+            const newUser = window.pegaEngine.registerUser(usernameInput, passwordInput, nameInput, emailInput, mobileInput);
+            this.showToast("Account created successfully! Please login.", "success");
+            this.switchAuthTab("login");
+            
+            // Prefill login form
+            document.getElementById("loginUsername").value = newUser.username;
+            document.getElementById("loginPassword").value = newUser.password;
+        } catch (err) {
+            this.showToast(err.message, "error");
+        }
+    }
+
+    handleLogout() {
+        window.pegaEngine.logoutUser();
+        this.showToast("Signed out successfully.", "info");
+        this.renderUserSessionPill();
+        
+        if (this.currentView === "my-bookings") {
+            this.renderMyBookings();
+        }
     }
 }
 

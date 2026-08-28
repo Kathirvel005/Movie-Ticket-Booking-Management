@@ -186,6 +186,26 @@ const CineWaveInitialData = {
             backdropUrl: "assets/jana_nayagan_poster.png",
             trailerUrl: "https://www.youtube.com",
             featured: true
+        },
+        {
+            id: "MOV-010",
+            title: "Idhayam Murali",
+            language: "Tamil",
+            genre: "Romantic / Comedy / Drama",
+            duration: "2h 25m",
+            certification: "U",
+            rating: 8.5,
+            votes: "76.2K",
+            releaseDate: "2025",
+            startingPrice: 150,
+            status: "Now Showing",
+            director: "Aakash Baskaran",
+            cast: "Atharvaa Murali, Preethi Asrani, VTV Ganesh, Karunakaran",
+            description: "A heartwarming and humorous tale of unrequited one-sided love and enduring friendship. A Thaman S musical presented by Dawn Pictures.",
+            posterUrl: "assets/idhayam_murali_poster.png",
+            backdropUrl: "assets/idhayam_murali_poster.png",
+            trailerUrl: "https://www.youtube.com",
+            featured: false
         }
     ],
 
@@ -449,6 +469,48 @@ const CineWaveInitialData = {
             ticketPrice: 350,
             totalSeats: 48,
             bookedSeats: ["A3", "A4", "B5", "B6"],
+            status: "Available"
+        },
+        {
+            id: "SHW-114",
+            movieId: "MOV-010",
+            theatreId: "THT-001",
+            screenId: "SCR-002",
+            date: "2026-08-28",
+            startTime: "01:15 PM",
+            endTime: "03:40 PM",
+            showType: "Regular",
+            ticketPrice: 190,
+            totalSeats: 48,
+            bookedSeats: ["A1", "A2", "B3", "B4", "C1", "C2"],
+            status: "Available"
+        },
+        {
+            id: "SHW-115",
+            movieId: "MOV-010",
+            theatreId: "THT-004",
+            screenId: "SCR-001",
+            date: "2026-08-28",
+            startTime: "06:15 PM",
+            endTime: "08:40 PM",
+            showType: "Regular",
+            ticketPrice: 150,
+            totalSeats: 48,
+            bookedSeats: ["B1", "B2", "D3", "D4"],
+            status: "Available"
+        },
+        {
+            id: "SHW-116",
+            movieId: "MOV-010",
+            theatreId: "THT-005",
+            screenId: "SCR-001",
+            date: "2026-08-28",
+            startTime: "09:00 PM",
+            endTime: "11:25 PM",
+            showType: "Regular",
+            ticketPrice: 140,
+            totalSeats: 48,
+            bookedSeats: ["A1", "A2", "C3", "C4"],
             status: "Available"
         }
     ],
